@@ -13,7 +13,8 @@ public class customerMainActivity extends javax.swing.JFrame {
     /**
      * Creates new form mainActivity
      */
-    public customerMainActivity() {
+    public customerMainActivity(int userid) {
+        UserId = userid;
         initComponents();
     }
 
@@ -198,7 +199,7 @@ public class customerMainActivity extends javax.swing.JFrame {
         // TODO: get present information
         
         // change interface to admin personal information update interface
-        UserPersonalInformation customerInfoFrame = new UserPersonalInformation();
+        UserPersonalInformation customerInfoFrame = new UserPersonalInformation(UserId);
         customerInfoFrame.setVisible(true);
         customerInfoFrame.pack(); //cause Window be sized to fix layout size
         customerInfoFrame.setLocationRelativeTo(null);
@@ -212,6 +213,7 @@ public class customerMainActivity extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    public int UserId;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FeedbackBtn;
     private javax.swing.JButton FixingRequestbtn1;

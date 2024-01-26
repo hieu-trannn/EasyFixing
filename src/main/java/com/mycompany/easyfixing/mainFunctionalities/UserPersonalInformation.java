@@ -12,9 +12,11 @@ public class UserPersonalInformation extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminPersonalInformation
+     * @param userid
      */
-    public UserPersonalInformation() {
+    public UserPersonalInformation(int userid) {
         initComponents();
+        UserId = userid;
     }
 
     /**
@@ -346,7 +348,7 @@ public class UserPersonalInformation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dob_txtActionPerformed
 
-
+    public int UserId;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DistrictBox;
     private javax.swing.JComboBox<String> ProvinceBox;

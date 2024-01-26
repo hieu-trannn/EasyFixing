@@ -13,8 +13,9 @@ public class workerMainActivity extends javax.swing.JFrame {
     /**
      * Creates new form mainActivity
      */
-    public workerMainActivity() {
+    public workerMainActivity(int userid) {
         initComponents();
+        UserId = userid;
     }
 
     /**
@@ -210,7 +211,7 @@ public class workerMainActivity extends javax.swing.JFrame {
         // TODO: get present information
         
         // change interface to admin personal information update interface
-        UserPersonalInformation workerInfoFrame = new UserPersonalInformation();
+        UserPersonalInformation workerInfoFrame = new UserPersonalInformation(UserId);
         workerInfoFrame.setVisible(true);
         workerInfoFrame.pack(); //cause Window be sized to fix layout size
         workerInfoFrame.setLocationRelativeTo(null);
@@ -221,9 +222,9 @@ public class workerMainActivity extends javax.swing.JFrame {
         return this.notificationBellBtn;
     }
     /**
-     * @param args the command line arguments
      */
 
+    public int UserId;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FeedbackBtn;
     private javax.swing.JButton FixingRequestbtn;

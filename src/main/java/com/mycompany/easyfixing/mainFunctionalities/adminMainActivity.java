@@ -7,6 +7,10 @@ package com.mycompany.easyfixing.mainFunctionalities;
 import com.mycompany.easyfixing.mainFunctionalities.AdminUpdateDatabase.AdminAddNewWorker;
 import com.mycompany.easyfixing.mainFunctionalities.AdminUpdateDatabase.AdminDeleteWorker;
 import com.mycompany.easyfixing.mainFunctionalities.AdminUpdateDatabase.AdminUpdateWorkerService;
+import com.mycompany.easyfixing.mainFunctionalities.PersonalInformation.UserManageAccount;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,8 +21,9 @@ public class adminMainActivity extends javax.swing.JFrame {
     /**
      * Creates new form mainActivity
      */
-    public adminMainActivity() {
+    public adminMainActivity(int userid) {
         initComponents();
+        UserId = userid;
     }
 
     /**
@@ -93,7 +98,7 @@ public class adminMainActivity extends javax.swing.JFrame {
         welcomeLabel.setText("Welcome Admin!");
 
         addInfoBtn.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        addInfoBtn.setText("Add Information");
+        addInfoBtn.setText("Manage User");
         addInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInfoBtnActionPerformed(evt);
@@ -101,7 +106,7 @@ public class adminMainActivity extends javax.swing.JFrame {
         });
 
         updateBtn.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        updateBtn.setText("Update Information");
+        updateBtn.setText("Statistic Information");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -109,7 +114,7 @@ public class adminMainActivity extends javax.swing.JFrame {
         });
 
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        deleteBtn.setText("Delete Information");
+        deleteBtn.setText("Update Service");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -141,13 +146,13 @@ public class adminMainActivity extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(notificationBellBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(addInfoBtn)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn)
-                .addGap(47, 47, 47)
+                .addGap(46, 46, 46)
                 .addComponent(updateBtn)
-                .addGap(37, 37, 37))
+                .addGap(64, 64, 64))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,13 +211,42 @@ public class adminMainActivity extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_updateBtnActionPerformed
 
+//    private ImageIcon getScaledIcon(ImageIcon originalIcon, int desiredWidth, int desiredHeight) {
+//        // Get the original image from the icon
+//        Image originalImage = originalIcon.getImage();
+//
+//        // Create a scaled version of the image
+//        Image scaledImage = originalImage.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH);
+//
+//        // Create a new ImageIcon from the scaled image
+//        return new ImageIcon(scaledImage);
+//    }
     private void infoManaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoManaBtnActionPerformed
         // TODO add your handling code here:
         
-        // TODO: get present information
+        /*
+        Set icon for Back Button + change interface
+        */
+        ImageIcon oriBackButton = new ImageIcon("C:\\Users\\hieut\\Documents\\NetBeansProjects\\EasyFixing\\src\\main\\java\\com\\mycompany\\easyfixing\\mainFunctionalities\\icon\\backbutton.png");
+        // Specify the desired size for the image
+        int desiredWidth = 40;
+        int desiredHeight = 40;
+        Image oriBackButtonImage = oriBackButton.getImage();
+        Image backButtonImage = oriBackButtonImage.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH);
+        ImageIcon backButton = new ImageIcon(backButtonImage);
         
-        // change interface to admin personal information update interface
-        UserPersonalInformation adminInfoFrame = new UserPersonalInformation();
+        // change interface to UserManageAccount
+        UserManageAccount UserManageAccountFrame = new UserManageAccount(UserId);
+        UserManageAccountFrame.setVisible(true);
+        UserManageAccountFrame.pack(); //cause Window be sized to fix layout size
+        UserManageAccountFrame.setLocationRelativeTo(null);
+        //set avatar and information management
+        Color transparentAvaColor = UserManageAccountFrame.getPanel().getBackground();
+        UserManageAccountFrame.getBackBtn().setBackground(transparentAvaColor);
+        UserManageAccountFrame.getBackBtn().setIcon(backButton);
+
+        // change interface to user manage account interface
+        UserManageAccount adminInfoFrame = new UserManageAccount(UserId);
         adminInfoFrame.setVisible(true);
         adminInfoFrame.pack(); //cause Window be sized to fix layout size
         adminInfoFrame.setLocationRelativeTo(null);
@@ -221,7 +255,7 @@ public class adminMainActivity extends javax.swing.JFrame {
 
     private void addInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInfoBtnActionPerformed
         // TODO add your handling code here:
-         // change interface to admin add new worker interface
+        // change interface to admin add new worker interface
         AdminAddNewWorker adminAddFrame = new AdminAddNewWorker();
         adminAddFrame.setVisible(true);
         adminAddFrame.pack(); //cause Window be sized to fix layout size
@@ -239,24 +273,22 @@ public class adminMainActivity extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-    public javax.swing.JButton getNoticeBtn()
-    {
+    public javax.swing.JButton getNoticeBtn() {
         return this.notificationBellBtn;
     }
+
     /**
-     * @return 
+     * @return
      */
-    public javax.swing.JPanel getAvaJPanel()
-    {
+    public javax.swing.JPanel getAvaJPanel() {
         return this.AdminPanel;
     }
-    
-    public javax.swing.JButton getAvaBtn()
-    {
-        return this.infoManaBtn;
-    }   
-    
 
+    public javax.swing.JButton getAvaBtn() {
+        return this.infoManaBtn;
+    }
+
+    public int UserId;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JButton addInfoBtn;

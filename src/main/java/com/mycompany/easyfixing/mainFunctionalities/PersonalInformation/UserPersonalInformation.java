@@ -13,7 +13,7 @@ public class UserPersonalInformation extends javax.swing.JFrame {
     /**
      * Creates new form AdminPersonalInformation
      */
-    public UserPersonalInformation() {
+    public UserPersonalInformation(int UserId) {
         initComponents();
     }
 

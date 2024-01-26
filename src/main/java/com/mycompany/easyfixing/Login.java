@@ -270,7 +270,7 @@ public class Login extends javax.swing.JFrame {
                             /*
         =============== if admin ================
                              */
-                            adminMainActivity adminMainActivityFrame = new adminMainActivity();
+                            adminMainActivity adminMainActivityFrame = new adminMainActivity(userID);
                             adminMainActivityFrame.setVisible(true);
                             adminMainActivityFrame.pack(); //cause Window be sized to fix layout size
                             adminMainActivityFrame.setLocationRelativeTo(null);

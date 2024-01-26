@@ -293,7 +293,7 @@ public class Login extends javax.swing.JFrame {
                             /*
         =============== if customer ================
                              */
-                            customerMainActivity customerMainActivityFrame = new customerMainActivity();
+                            customerMainActivity customerMainActivityFrame = new customerMainActivity(userID);
                             customerMainActivityFrame.setVisible(true);
                             customerMainActivityFrame.pack(); //cause Window be sized to fix layout size
                             customerMainActivityFrame.setLocationRelativeTo(null);
@@ -310,7 +310,7 @@ public class Login extends javax.swing.JFrame {
                             /*
         =============== if worker ================
                              */
-                            workerMainActivity workerMainActivityFrame = new workerMainActivity();
+                            workerMainActivity workerMainActivityFrame = new workerMainActivity(userID);
                             workerMainActivityFrame.setVisible(true);
                             workerMainActivityFrame.pack(); //cause Window be sized to fix layout size
                             workerMainActivityFrame.setLocationRelativeTo(null);

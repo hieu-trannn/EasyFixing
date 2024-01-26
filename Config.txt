@@ -1,0 +1,28 @@
+Back ground Color: [0,102,102]
+Button: [255,51,51]
+	- Icon trong Button: 50*50
+Frame: 800 * 500
+Chữ trong frame:
+	- Tiêu đề chính: Seigu - Bold - 36, Color: [0,102,102]
+	- Chữ khác:Seigu - Plain - 18, 
+	- Chữ welcome: Goudy old Style - Italic - 36
+	
+**26/12**
+- Cần: 
+	+ GUI Main activity riêng cho từng đối tượng: admin, customer, worker
+	+ Thực hiện liên kết CSDL với App: NetBeans IDE 20. Build project: Maven: DƯƠNG
+	+ Thực hiện truy vấn khi làm chức năng SignUp
+		- Truy vấn Tỉnh, Huyện, xã: 
+			CSDL: Tạo bảng các tỉnh, huyện, xã: DƯƠNG
+			CSDL: truy vấn các huyện từ tỉnh, các xã từ huyện: DƯƠNG
+			Code: Làm 1 list chạy xuống khi nhấn nút
+		- Truy vấn để check xem có hợp lệ không (mail có trong CSDL chưa)
+			CSDL: truy vấn mail: DƯƠNG
+	+ Thực hiện đưa data từ chức năng SignUp lên CSDL
+		- Cập nhật bảng người dùng trên CSDL: userid, tên, địa chỉ, sdt, username, password, email, **cập nhật role: customer / worker**: DƯƠNG 
+	+ Thực hiện truy vấn từ CSDL để đăng nhập:
+		- Truy vấn xem có tài khoản trong database hay không?: DƯƠNG
+		- Nếu có, truy vấn userid của tài khoản đấy: DƯƠNG
+	+ Thực hiện truy vấn từ CSDL để thực hiện chức năng Forget Password (check xem email đấy có ở trong CSDL chưa)
+		- Truy vấn xem email có tồn tại trong database hay không: DƯƠNG
+		- Đưa password mới lên database: DƯƠNG

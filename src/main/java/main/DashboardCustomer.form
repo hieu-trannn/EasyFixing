@@ -75,6 +75,7 @@
         </Component>
         <Container class="javax.swing.JPanel" name="bodyPanel">
           <Properties>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 

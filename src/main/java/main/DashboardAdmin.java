@@ -4,11 +4,14 @@
  */
 package main;
 
+import UserManagement.UserManagement;
 import dashboardAdmin.MenuAdmin;
 import dashboardAdmin.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import swing.NPLinkButton;
 import ultis.EventMenuSelected;
 
 /**
@@ -21,7 +24,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
      * Creates new form DashboardAdmin
      */
     // Declare Panel here
-    private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private JPanel panel1, panel2, panel3, panel4, panel5;
 
     public DashboardAdmin() {
         initComponents();
@@ -29,11 +32,11 @@ public class DashboardAdmin extends javax.swing.JFrame {
         setSize(1440, 900);
         setBackground(new Color(0, 0, 0, 0));
 
-        panel1 = new SamplePanel("1");
-        panel2 = new SamplePanel("2");
-        panel3 = new SamplePanel("3");
-        panel4 = new SamplePanel("4");
-        panel5 = new SamplePanel("5");
+        panel1 = new JPanel();
+        panel2 = new JPanel();
+        panel3 = new JPanel();
+        panel4 = new JPanel();
+        panel5 = new JPanel();
 
         menu.initMoving(DashboardAdmin.this);
 

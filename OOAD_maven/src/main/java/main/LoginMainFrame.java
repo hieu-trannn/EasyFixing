@@ -29,7 +29,8 @@ public class LoginMainFrame extends javax.swing.JFrame {
      */
     public LoginMainFrame() {
         initComponents();
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+//        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setSize(1440, 900);
         LoginPanel login = new LoginPanel();
         RegisterPanel register = new RegisterPanel();
         ForgetPassPanel forgetPass = new ForgetPassPanel();
@@ -62,8 +63,8 @@ public class LoginMainFrame extends javax.swing.JFrame {
         });
 
         register.addEventSignUp((ActionEvent ae) -> {
-            Vector <String> data = register.checkInfor();
-            if (data!= null) {
+            Vector<String> data = register.checkInfor();
+            if (data != null) {
                 String userEmail = data.get(4);
                 JavaEmailSender emailSender = new JavaEmailSender();
                 try {
@@ -77,13 +78,18 @@ public class LoginMainFrame extends javax.swing.JFrame {
         });
 
         forgetPass.addEventBackLogin((ActionEvent ae) -> {
+            forgetPass.setStopTimer(true);
             slide.show(0);
             login.login();
         });
-        
+
         authen.addEventBackRegister((ActionEvent ae) -> {
-            if (authen.isGoLogin()) slide.show(0);
-            else slide.show(1);
+            authen.setStopTimer(true);
+            if (authen.isGoLogin()) {
+                slide.show(0);
+            } else {
+                slide.show(1);
+            }
 //            register.register();
         });
     }

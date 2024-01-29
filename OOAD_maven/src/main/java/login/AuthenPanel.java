@@ -61,6 +61,8 @@ public class AuthenPanel extends javax.swing.JPanel {
         setDobFormated(data.get(7));
         labelEmail.setText(getUserEmail());
         labelWrongCode.setVisible(false);
+        setStopTimer(false);
+        setCounterValue(60);
         setGoLogin(false);
         startCounter();
     }
@@ -81,7 +83,6 @@ public class AuthenPanel extends javax.swing.JPanel {
                 showNoti("Out of Time. Please try again!");
                 ((Timer) (e.getSource())).stop();
                 btnBackRegister.doClick();
-                System.out.println("time out");
             }
         });
         timer.start();
@@ -180,9 +181,9 @@ public class AuthenPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 160, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -196,9 +197,9 @@ public class AuthenPanel extends javax.swing.JPanel {
                         .addComponent(labelWrongCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,12 +228,12 @@ public class AuthenPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-            int userCode;
-            try {
-                userCode = Integer.parseInt(txtCode.getText());
-            } catch (NumberFormatException e) {
-                userCode = 0;
-            }
+        int userCode;
+        try {
+            userCode = Integer.parseInt(txtCode.getText());
+        } catch (NumberFormatException e) {
+            userCode = 0;
+        }
         if ((getCodeReference() != 0) && (userCode == getCodeReference())) {
             Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {

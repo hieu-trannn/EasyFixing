@@ -9,7 +9,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>main.LoginMainFrame</exec.mainClass>
+        <exec.mainClass>main.DashboardAdmin</exec.mainClass>
+        <!--<exec.mainClass>main.LoginMainFrame</exec.mainClass>-->
+
     </properties>
     <name>OOAD_maven</name>
     <dependencies>

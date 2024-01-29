@@ -74,11 +74,13 @@ public class ForgetPassPanel extends javax.swing.JPanel {
     }
 
     public void resetPass(String email) {
+        setStopTimer(false);
         txtCode.grabFocus();
         setUserEmail(email);
         labelEmail.setText(email);
         labelWrongCode.setVisible(false);
         txtPass.setVisible(false);
+        setCounterValue(60);
         startCounter();
     }
 
@@ -262,14 +264,13 @@ public class ForgetPassPanel extends javax.swing.JPanel {
             } catch (NumberFormatException e) {
                 userCode = 0;
             }
-            
+
             if ((getCodeReference() != 0) && (userCode == getCodeReference())) {
                 stopTimer = true;
                 labelWrongCode.setText("Please provide your new password!");
                 labelWrongCode.setVisible(true);
                 txtCode.setFocusable(false);
                 txtPass.setVisible(true);
-                System.out.println("oke pass inside btnActionPerformed");
             } else {
                 labelWrongCode.setText("Incorrect authentication code!");
                 labelWrongCode.setVisible(true);

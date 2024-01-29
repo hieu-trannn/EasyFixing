@@ -52,11 +52,11 @@ public class ListMenu<E extends Object> extends JList<E> {
                             if (event != null) {
                                 event.selected(index);
                             }
+                        repaint();
                         }
                     } else {
                         selectedIndex = index;
                     }
-                    repaint();
                 }
             }
 

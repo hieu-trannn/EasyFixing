@@ -4,7 +4,6 @@
  */
 package main;
 
-import dashboardAdmin.MenuAdmin;
 import dashboardAdmin.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -15,7 +14,7 @@ import ultis.EventMenuSelected;
  *
  * @author delini
  */
-public class DashboardAdmin extends javax.swing.JFrame {
+public class DashboardCustomer extends javax.swing.JFrame {
 
     /**
      * Creates new form DashboardAdmin
@@ -23,51 +22,54 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
 
-    public DashboardAdmin() {
+    public DashboardCustomer() {
         initComponents();
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
         setBackground(new Color(0, 0, 0, 0));
 
-        panel1 = new SamplePanel("1");
-        panel2 = new SamplePanel("2");
-        panel3 = new SamplePanel("3");
-        panel4 = new SamplePanel("4");
-        panel5 = new SamplePanel("5");
+    panel1 = new SamplePanel("1");
+    panel2 = new SamplePanel("2");
+    panel3 = new SamplePanel("3");
+    panel4 = new SamplePanel("4");
+    panel5 = new SamplePanel("5");
 
-        menu.initMoving(DashboardAdmin.this);
+    menu.initMoving (DashboardCustomer.this);
 
-        menu.addEventMenuSelected(
-                new EventMenuSelected() {
+    menu.addEventMenuSelected ( 
+        new EventMenuSelected() {
             @Override
-            public void selected(int index
+        public void selected
+        (int index
+        
             ) {
                 switch (index) {
-                    case 1:
-                        setPanel(panel1);
-                        break;
-                    case 2:
-                        setPanel(panel2);
-                        break;
-                    case 3:
-                        setPanel(panel3);
-                        break;
-                    case 4:
-                        setPanel(panel4);
-                        break;
-                    case 6:
-                        setPanel(panel5);
-                    default:
-                        break;
-                }
-//            System.out.println("Selected: " + index);
+                case 1:
+                    setPanel(panel1);
+                    break;
+                case 2:
+                    setPanel(panel2);
+                    break;
+                case 3:
+                    setPanel(panel3);
+                    break;
+                case 4:
+                    setPanel(panel4);
+                    break;
+                case 8:
+                    setPanel(panel5);
+                default:
+                    break;
             }
+//            System.out.println("Selected: " + index);
         }
-        );
-        setPanel(panel1);
     }
 
-    private void setPanel(JComponent com) {
+    );
+    setPanel(panel1);
+}
+
+private void setPanel(JComponent com) {
         bodyPanel.removeAll();
         bodyPanel.add(com);
         bodyPanel.repaint();
@@ -84,44 +86,48 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new swing.PanelBorder();
-        menu = new dashboardAdmin.MenuAdmin();
         search = new dashboardAdmin.HeaderBar();
         bodyPanel = new javax.swing.JPanel();
+        menu = new dashboardCustomer.MenuCustomer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setRadius(15);
 
-        menu.setBotColor(new java.awt.Color(247, 225, 173));
-        menu.setTopColor(new java.awt.Color(247, 186, 45));
-
         bodyPanel.setOpaque(false);
         bodyPanel.setLayout(new java.awt.BorderLayout());
 
-        panelBorder1.setLayer(menu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menu.setBotColor(new java.awt.Color(247, 225, 173));
+        menu.setTopColor(new java.awt.Color(247, 186, 45));
+
         panelBorder1.setLayer(search, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelBorder1.setLayer(bodyPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelBorder1.setLayer(menu, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,36 +159,42 @@ public class DashboardAdmin extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-                }
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardCustomer.class  
 
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DashboardCustomer.class  
 
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DashboardCustomer.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DashboardCustomer.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardAdmin().setVisible(true);
+                new DashboardCustomer().setVisible(true);
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
-    private dashboardAdmin.MenuAdmin menu;
+    private dashboardCustomer.MenuCustomer menu;
     private swing.PanelBorder panelBorder1;
     private dashboardAdmin.HeaderBar search;
     // End of variables declaration//GEN-END:variables

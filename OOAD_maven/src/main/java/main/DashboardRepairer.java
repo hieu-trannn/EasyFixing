@@ -15,7 +15,7 @@ import ultis.EventMenuSelected;
  *
  * @author delini
  */
-public class DashboardAdmin extends javax.swing.JFrame {
+public class DashboardRepairer extends javax.swing.JFrame {
 
     /**
      * Creates new form DashboardAdmin
@@ -23,7 +23,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
 
-    public DashboardAdmin() {
+    public DashboardRepairer() {
         initComponents();
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
@@ -35,7 +35,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panel4 = new SamplePanel("4");
         panel5 = new SamplePanel("5");
 
-        menu.initMoving(DashboardAdmin.this);
+        menu.initMoving(DashboardRepairer.this);
 
         menu.addEventMenuSelected(
                 new EventMenuSelected() {
@@ -84,44 +84,48 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new swing.PanelBorder();
-        menu = new dashboardAdmin.MenuAdmin();
         search = new dashboardAdmin.HeaderBar();
         bodyPanel = new javax.swing.JPanel();
+        menu = new dashboardRepairer.MenuRepairer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setRadius(15);
 
-        menu.setBotColor(new java.awt.Color(247, 225, 173));
-        menu.setTopColor(new java.awt.Color(247, 186, 45));
-
         bodyPanel.setOpaque(false);
         bodyPanel.setLayout(new java.awt.BorderLayout());
 
-        panelBorder1.setLayer(menu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menu.setBotColor(new java.awt.Color(247, 225, 173));
+        menu.setTopColor(new java.awt.Color(247, 186, 45));
+
         panelBorder1.setLayer(search, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelBorder1.setLayer(bodyPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelBorder1.setLayer(menu, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,33 +160,34 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
+            java.util.logging.Logger.getLogger(DashboardRepairer.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
+            java.util.logging.Logger.getLogger(DashboardRepairer.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
+            java.util.logging.Logger.getLogger(DashboardRepairer.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
+            java.util.logging.Logger.getLogger(DashboardRepairer.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardAdmin().setVisible(true);
+                new DashboardRepairer().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
-    private dashboardAdmin.MenuAdmin menu;
+    private dashboardRepairer.MenuRepairer menu;
     private swing.PanelBorder panelBorder1;
     private dashboardAdmin.HeaderBar search;
     // End of variables declaration//GEN-END:variables

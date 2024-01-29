@@ -95,6 +95,7 @@ private void setPanel(JComponent com) {
 
         panelBorder1.setRadius(15);
 
+        bodyPanel.setName(""); // NOI18N
         bodyPanel.setOpaque(false);
         bodyPanel.setLayout(new java.awt.BorderLayout());
 
@@ -147,6 +148,7 @@ private void setPanel(JComponent com) {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

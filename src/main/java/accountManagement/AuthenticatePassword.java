@@ -13,8 +13,9 @@ public class AuthenticatePassword extends javax.swing.JPanel {
     /**
      * Creates new form AuthenticatePassword
      */
-    public AuthenticatePassword() {
+    public AuthenticatePassword(String pwd) {
         initComponents();
+        PassWord = pwd;
     }
 
     /**
@@ -100,7 +101,16 @@ public class AuthenticatePassword extends javax.swing.JPanel {
         // if pressed change password -> change pwd panel
     }//GEN-LAST:event_btnSignUpActionPerformed
 
-
+    public String getPassWord()
+    {
+        return this.PassWord;
+    }
+    public void setPassWord(String pwd)
+    {
+        this.PassWord = pwd;
+    }
+    
+    private String PassWord;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnSignUp;
     private javax.swing.JLabel jLabel1;

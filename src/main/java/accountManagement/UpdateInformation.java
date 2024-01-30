@@ -22,8 +22,9 @@ public class UpdateInformation extends javax.swing.JPanel {
     /**
      * Creates new form UpdateInformation
      */
-    public UpdateInformation() {
+    public UpdateInformation(int userid) {
         initComponents();
+        UserID = userid;
     }
 
     /**
@@ -436,7 +437,16 @@ public class UpdateInformation extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-
+    public int getUserID()
+    {
+        return this.UserID;
+    }
+    public void setUserID(int userid)
+    {
+        this.UserID = userid;
+    }
+    
+    private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxDistrict;
     private javax.swing.JComboBox boxProvince;

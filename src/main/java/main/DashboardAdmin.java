@@ -4,11 +4,13 @@
  */
 package main;
 
+import accountManagement.AccountManagement;
 import dashboard.MenuAdmin;
 import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import ultis.EventMenuSelected;
 
 /**
@@ -22,19 +24,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
      */
     // Declare Panel here
     private int userId;
-    private SamplePanel panel1, panel2, panel3, panel4, panel5;
+//    private AccountManagement AccountManagmentJPanel =new AccountManagement(getUserId()) ;
+//    private JPanel SearchRepairJPanel, NoticeManagementJPanel, UserManagementJPanel, UpdateServiceJPanel, StatisticInformationJPanel;
 
     public DashboardAdmin(int userId) {
         initComponents();
         setUserId(userId);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
-
-        panel1 = new SamplePanel("1");
-        panel2 = new SamplePanel("2");
-        panel3 = new SamplePanel("3");
-        panel4 = new SamplePanel("4");
-        panel5 = new SamplePanel("5");
 
         menu.initMoving(DashboardAdmin.this);
 
@@ -44,20 +41,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
             public void selected(int index
             ) {
                 switch (index) {
-                    case 1:
-                        setPanel(panel1);
-                        break;
-                    case 2:
-                        setPanel(panel2);
-                        break;
-                    case 3:
-                        setPanel(panel3);
-                        break;
-                    case 4:
-                        setPanel(panel4);
-                        break;
-                    case 6:
-                        setPanel(panel5);
+//                    case 1:
+//                        setPanel();
+//                        break;
+//                    case 2:
+//                        setPanel(SearchRepairJPanel);
+//                        break;
+//                    case 3:
+//                        setPanel(NoticeManagementJPanel);
+//                        break;
+//                    case 4:
+//                        setPanel(UserManagementJPanel);
+//                        break;
+//                    case 5:
+//                        setPanel(UpdateServiceJPanel);
+                    case 7:
+                        setPanel(new AccountManagement(getUserId()));
                     default:
                         break;
                 }
@@ -65,7 +64,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         }
         );
-        setPanel(panel1);
+//        setPanel(panel1);
     }
 
     private void setPanel(JComponent com) {

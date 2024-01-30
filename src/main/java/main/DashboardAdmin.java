@@ -4,14 +4,13 @@
  */
 package main;
 
-import personalManagement.PersonalManagement;
+import accountManagement.AccountManagement;
 import dashboard.MenuAdmin;
 import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import swing.NPLinkButton;
 import ultis.EventMenuSelected;
 
 /**
@@ -24,19 +23,15 @@ public class DashboardAdmin extends javax.swing.JFrame {
      * Creates new form DashboardAdmin
      */
     // Declare Panel here
-    private JPanel panel1, panel2, panel3, panel4, panel5;
+    private int userId;
+//    private AccountManagement AccountManagmentJPanel =new AccountManagement(getUserId()) ;
+//    private JPanel SearchRepairJPanel, NoticeManagementJPanel, UserManagementJPanel, UpdateServiceJPanel, StatisticInformationJPanel;
 
-    public DashboardAdmin() {
+    public DashboardAdmin(int userId) {
         initComponents();
+        setUserId(userId);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
-        setBackground(new Color(0, 0, 0, 0));
-
-        panel1 = new JPanel();
-        panel2 = new JPanel();
-        panel3 = new JPanel();
-        panel4 = new JPanel();
-        panel5 = new JPanel();
 
         menu.initMoving(DashboardAdmin.this);
 
@@ -46,20 +41,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
             public void selected(int index
             ) {
                 switch (index) {
-                    case 1:
-                        setPanel(panel1);
-                        break;
-                    case 2:
-                        setPanel(panel2);
-                        break;
-                    case 3:
-                        setPanel(panel3);
-                        break;
-                    case 4:
-                        setPanel(panel4);
-                        break;
-                    case 6:
-                        setPanel(panel5);
+//                    case 1:
+//                        setPanel();
+//                        break;
+//                    case 2:
+//                        setPanel(SearchRepairJPanel);
+//                        break;
+//                    case 3:
+//                        setPanel(NoticeManagementJPanel);
+//                        break;
+//                    case 4:
+//                        setPanel(UserManagementJPanel);
+//                        break;
+//                    case 5:
+//                        setPanel(UpdateServiceJPanel);
+                    case 7:
+                        setPanel(new AccountManagement(getUserId()));
                     default:
                         break;
                 }
@@ -67,7 +64,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         }
         );
-        setPanel(panel1);
+//        setPanel(panel1);
     }
 
     private void setPanel(JComponent com) {
@@ -92,7 +89,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         panelBorder1.setRadius(15);
 
@@ -113,18 +109,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bodyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,52 +137,24 @@ public class DashboardAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAdmin.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DashboardAdmin().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
     private dashboard.MenuAdmin menu;
     private swing.PanelBorder panelBorder1;
     private dashboard.HeaderBar search;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

@@ -2,18 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package personalManagement;
+package accountManagement;
+
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComponent;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
  * @author hieut
  */
-public class PersonalManagement extends javax.swing.JPanel {
-    private int UserID;
+public class AccountManagement extends javax.swing.JPanel {
+
     /**
      * Creates new form UserManagement
      */
-    public PersonalManagement(int userid) {
+    public AccountManagement(int userid) {
         initComponents();
         UserID = userid;
     }
@@ -82,7 +90,7 @@ public class PersonalManagement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSubmit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSubmit2, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
+                    .addComponent(btnSubmit2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
                 .addGap(317, 317, 317))
         );
         layout.setVerticalGroup(
@@ -90,9 +98,9 @@ public class PersonalManagement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addComponent(btnSubmit2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(65, 65, 65)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(64, 64, 64)
                 .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(183, 183, 183))
         );
@@ -100,7 +108,7 @@ public class PersonalManagement extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
@@ -109,9 +117,32 @@ public class PersonalManagement extends javax.swing.JPanel {
 
     private void btnSubmit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit2ActionPerformed
         // TODO add your handling code here:
+        Ca4JDBCMaven db = new Ca4JDBCMaven();
+        try {
+            String resultPwd = db.getPassword(getUserID());
+            setPanel(new AuthenticatePassword(resultPwd));  //              BUGGGGG
+//            this.setVisible(false);
+//            authenticatePasswordPanel.setVisible(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSubmit2ActionPerformed
+    private void setPanel(JComponent com) {
+        this.removeAll();
+        this.add(com);
+        this.repaint();
+        this.revalidate();
+    }
+    public int getUserID() {
+        return this.UserID;
+    }
 
+    public void setUserID(int userid) {
+        this.UserID = userid;
+    }
 
+    private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnSubmit;
     private swing.NPLinkButton btnSubmit1;

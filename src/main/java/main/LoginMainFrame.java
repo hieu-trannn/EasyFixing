@@ -13,9 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ultis.Ca4JDBCMaven;
 import ultis.JavaEmailSender;
 
 /**
@@ -53,6 +55,42 @@ public class LoginMainFrame extends javax.swing.JFrame {
                     forgetPass.setCodeReference(emailSender.sendForgetPass(userEmail));
                 } catch (UnsupportedEncodingException ex) {
                     Logger.getLogger(LoginMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        login.addEventLogin((ActionEvent ae) -> {
+            String email, pass;
+            email = login.getUserEmail();
+            pass = login.getUserPass();
+
+            if (pass.isEmpty() || email.isEmpty()) {
+                login.setLabelWrongUser("Please provide all needed information!", true);
+            } else {
+                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+                try {
+                    int id = dtb_query.loginUser(email, pass);
+                    if (id == -1) {
+                        login.setLabelWrongUser("Incorrect email or password!", true);
+                    } else {
+                        login.setLabelWrongUser(" ", false);
+                        if (dtb_query.isUserInRole(id, "NguoiQuanLy")) {
+                            DashboardAdmin adminFrame = new DashboardAdmin(id);
+                            adminFrame.setVisible(true);
+                            this.dispose();
+                        } else if (dtb_query.isUserInRole(id, "KhachHang")) {
+                            DashboardCustomer customerFrame = new DashboardCustomer(id);
+                            customerFrame.setVisible(true);
+                            this.dispose();
+                        } else if (dtb_query.isUserInRole(id, "Tho")) {
+                            DashboardRepairer repairerFrame = new DashboardRepairer(id);
+                            repairerFrame.setVisible(true);
+                            this.dispose();
+                        }
+                    }
+                    // Jump to main screen
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

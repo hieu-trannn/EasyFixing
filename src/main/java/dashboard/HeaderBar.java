@@ -53,6 +53,8 @@ public class HeaderBar extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        labelSearchIcon.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/search.png")); // NOI18N
+
         hintSearchText1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         hintSearchText1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +62,7 @@ public class HeaderBar extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/pass.png")); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);

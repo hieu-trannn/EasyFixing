@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package personalManagement;
+package accountManagement;
 
 /**
  *
@@ -13,8 +13,9 @@ public class ChangePassword extends javax.swing.JPanel {
     /**
      * Creates new form ChangePassword
      */
-    public ChangePassword() {
+    public ChangePassword(int userid) {
         initComponents();
+        UserID = userid;
     }
 
     /**
@@ -123,7 +124,16 @@ public class ChangePassword extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRePassActionPerformed
 
-
+    public int getUserID()
+    {
+        return this.UserID;
+    }
+    public void setUserID(int userid)
+    {
+        this.UserID = userid;
+    }
+    
+    private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnCfChangePwd;
     private javax.swing.JLabel jLabel1;

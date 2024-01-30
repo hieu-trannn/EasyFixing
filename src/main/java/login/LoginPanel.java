@@ -5,9 +5,11 @@
 package login;
 
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.DashboardAdmin;
 import ultis.Ca4JDBCMaven;
 
 /**
@@ -37,11 +39,24 @@ public class LoginPanel extends javax.swing.JPanel {
         btnResetPass.addActionListener(event);
     }
 
+    public void addEventLogin(ActionListener event) {
+        btnLogin.addActionListener(event);
+    }
+
     public String getUserEmail() {
         return txtEmail.getText();
     }
 
-    public boolean checkEmail() {
+    public String getUserPass() {
+        return txtPass.getText();
+    }
+    
+    public void setLabelWrongUser(String text, Boolean visible) {
+        if (text!= null) labelWrongUser.setText(text);
+        if (visible != null) labelWrongUser.setVisible(visible);
+    }
+
+    public Boolean checkEmail() {
         String email = getUserEmail();
         if (email.isEmpty()) {
             labelWrongUser.setText("Please fill email account to reset password!");
@@ -50,7 +65,7 @@ public class LoginPanel extends javax.swing.JPanel {
         } else {
             Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
-                boolean id = dtb_query.checkEmailExistence(email);
+                Boolean id = dtb_query.checkEmailExistence(email);
                 if (!id) {
                     labelWrongUser.setText("Your email is not existed!");
                     labelWrongUser.setVisible(true);
@@ -208,28 +223,6 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String email, pass;
-        email = txtEmail.getText();
-        pass = txtPass.getText();
-
-        if (pass.isEmpty() || email.isEmpty()) {
-            labelWrongUser.setText("Please provide all needed information!");
-            labelWrongUser.setVisible(true);
-        } else {
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
-            try {
-                int id = dtb_query.loginUser(email, pass);
-                if (id == -1) {
-                    labelWrongUser.setText("Incorrect email or password!");
-                    labelWrongUser.setVisible(true);
-                } else {
-                    labelWrongUser.setVisible(false);
-                }
-                // Jump to main screen
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnResetPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetPassActionPerformed

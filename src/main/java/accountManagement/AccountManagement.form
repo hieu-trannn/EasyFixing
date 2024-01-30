@@ -29,7 +29,7 @@
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="btnSubmit" alignment="2" max="32767" attributes="0"/>
                   <Component id="btnSubmit1" alignment="2" max="32767" attributes="0"/>
-                  <Component id="btnSubmit2" alignment="2" pref="398" max="32767" attributes="0"/>
+                  <Component id="btnSubmit2" alignment="2" pref="413" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
           </Group>
@@ -40,9 +40,9 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
               <Component id="btnSubmit2" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Component id="btnSubmit" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="btnSubmit1" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
           </Group>

@@ -21,55 +21,53 @@ public class DashboardCustomer extends javax.swing.JFrame {
      */
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private int userId;
 
-    public DashboardCustomer() {
+    public DashboardCustomer(int userId) {
         initComponents();
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setUserId(userId);
         setSize(1440, 900);
-        setBackground(new Color(0, 0, 0, 0));
 
-    panel1 = new SamplePanel("1");
-    panel2 = new SamplePanel("2");
-    panel3 = new SamplePanel("3");
-    panel4 = new SamplePanel("4");
-    panel5 = new SamplePanel("5");
+        panel1 = new SamplePanel("1");
+        panel2 = new SamplePanel("2");
+        panel3 = new SamplePanel("3");
+        panel4 = new SamplePanel("4");
+        panel5 = new SamplePanel("5");
 
-    menu.initMoving (DashboardCustomer.this);
+        menu.initMoving(DashboardCustomer.this);
 
-    menu.addEventMenuSelected ( 
-        new EventMenuSelected() {
+        menu.addEventMenuSelected(
+                new EventMenuSelected() {
             @Override
-        public void selected
-        (int index
-        
+            public void selected(int index
             ) {
                 switch (index) {
-                case 1:
-                    setPanel(panel1);
-                    break;
-                case 2:
-                    setPanel(panel2);
-                    break;
-                case 3:
-                    setPanel(panel3);
-                    break;
-                case 4:
-                    setPanel(panel4);
-                    break;
-                case 8:
-                    setPanel(panel5);
-                default:
-                    break;
-            }
+                    case 1:
+                        setPanel(panel1);
+                        break;
+                    case 2:
+                        setPanel(panel2);
+                        break;
+                    case 3:
+                        setPanel(panel3);
+                        break;
+                    case 4:
+                        setPanel(panel4);
+                        break;
+                    case 8:
+                        setPanel(panel5);
+                    default:
+                        break;
+                }
 //            System.out.println("Selected: " + index);
+            }
         }
+        );
+        setPanel(panel1);
     }
 
-    );
-    setPanel(panel1);
-}
-
-private void setPanel(JComponent com) {
+    private void setPanel(JComponent com) {
         bodyPanel.removeAll();
         bodyPanel.add(com);
         bodyPanel.repaint();
@@ -91,11 +89,9 @@ private void setPanel(JComponent com) {
         menu = new dashboard.MenuCustomer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         panelBorder1.setRadius(15);
 
-        bodyPanel.setName(""); // NOI18N
         bodyPanel.setOpaque(false);
         bodyPanel.setLayout(new java.awt.BorderLayout());
 
@@ -145,54 +141,6 @@ private void setPanel(JComponent com) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-}
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardCustomer.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardCustomer.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardCustomer.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardCustomer.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DashboardCustomer().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
@@ -200,4 +148,18 @@ private void setPanel(JComponent com) {
     private swing.PanelBorder panelBorder1;
     private dashboard.HeaderBar search;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

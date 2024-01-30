@@ -21,7 +21,7 @@ import java.util.Vector;
  */
 public class Ca4JDBCMaven {
 
-    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=sa;password=NPLink1612";
+    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
 
     public void main(String[] args) throws ParseException {
 //        String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=easyfixing1;user=sa;password=12345678";

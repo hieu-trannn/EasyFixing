@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package dashboardRepairer;
+package dashboard;
 
-import dashboardCustomer.*;
-import dashboardAdmin.*;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -21,7 +19,7 @@ import ultis.EventMenuSelected;
  *
  * @author delini
  */
-public class MenuRepairer extends javax.swing.JPanel {
+public class MenuCustomer extends javax.swing.JPanel {
 
     private Color topColor = new Color(250, 236, 212);
     private Color botColor = new Color(245, 195, 118);
@@ -31,7 +29,7 @@ public class MenuRepairer extends javax.swing.JPanel {
     /**
      * Creates new form Menu
      */
-    public MenuRepairer() {
+    public MenuCustomer() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
@@ -45,7 +43,7 @@ public class MenuRepairer extends javax.swing.JPanel {
 
     public void init() {
         listMenu1.addItem(new ModelMenu(null, " ", ModelMenu.MenuType.EMPTY));
-        listMenu1.addItem(new ModelMenu(null, "Requested Order", ModelMenu.MenuType.MENU));  // new ImageIcon("path/to/your/image.png");
+        listMenu1.addItem(new ModelMenu(null, "Create New Order", ModelMenu.MenuType.MENU));  // new ImageIcon("path/to/your/image.png");
         listMenu1.addItem(new ModelMenu(null, "Current Order", ModelMenu.MenuType.MENU));
         listMenu1.addItem(new ModelMenu(null, "History", ModelMenu.MenuType.MENU));
         listMenu1.addItem(new ModelMenu(null, "Feedback", ModelMenu.MenuType.MENU));
@@ -90,7 +88,6 @@ public class MenuRepairer extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         listMenu1 = new swing.ListMenu<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
 
         panelMoving.setName(""); // NOI18N
         panelMoving.setOpaque(false);
@@ -103,7 +100,7 @@ public class MenuRepairer extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Welcome Repairer!");
+        jLabel2.setText("Welcome Customer!");
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
@@ -121,41 +118,23 @@ public class MenuRepairer extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
         );
 
-        jCheckBox1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("I am busy");
-        jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(listMenu1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelMoving, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     @Override
     protected void paintChildren(Graphics g) {
@@ -212,7 +191,6 @@ public class MenuRepairer extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private swing.ListMenu<String> listMenu1;

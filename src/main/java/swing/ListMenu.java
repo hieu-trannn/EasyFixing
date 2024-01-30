@@ -3,7 +3,7 @@
  */
 package swing;
 
-import dashboardAdmin.ModelMenu;
+import dashboard.ModelMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

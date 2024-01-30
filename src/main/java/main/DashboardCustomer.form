@@ -71,7 +71,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="dashboardAdmin.HeaderBar" name="search">
+        <Component class="dashboard.HeaderBar" name="search">
         </Component>
         <Container class="javax.swing.JPanel" name="bodyPanel">
           <Properties>
@@ -81,7 +81,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
         </Container>
-        <Component class="dashboardCustomer.MenuCustomer" name="menu">
+        <Component class="dashboard.MenuCustomer" name="menu">
           <Properties>
             <Property name="botColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ad" green="e1" red="f7" type="rgb"/>

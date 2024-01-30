@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package dashboardAdmin;
+package dashboard;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -53,8 +53,6 @@ public class HeaderBar extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        labelSearchIcon.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/search.png")); // NOI18N
-
         hintSearchText1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         hintSearchText1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +60,6 @@ public class HeaderBar extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/pass.png")); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
@@ -88,9 +85,10 @@ public class HeaderBar extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelSearchIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(hintSearchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hintSearchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

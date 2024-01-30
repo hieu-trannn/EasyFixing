@@ -4,9 +4,9 @@
  */
 package main;
 
-import UserManagement.UserManagement;
-import dashboardAdmin.MenuAdmin;
-import dashboardAdmin.SamplePanel;
+import personalManagement.PersonalManagement;
+import dashboard.MenuAdmin;
+import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
@@ -87,8 +87,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new swing.PanelBorder();
-        menu = new dashboardAdmin.MenuAdmin();
-        search = new dashboardAdmin.HeaderBar();
+        menu = new dashboard.MenuAdmin();
+        search = new dashboard.HeaderBar();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -185,8 +185,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
-    private dashboardAdmin.MenuAdmin menu;
+    private dashboard.MenuAdmin menu;
     private swing.PanelBorder panelBorder1;
-    private dashboardAdmin.HeaderBar search;
+    private dashboard.HeaderBar search;
     // End of variables declaration//GEN-END:variables
 }

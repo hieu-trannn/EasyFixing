@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserManagement;
+package personalManagement;
 
 /**
  *
@@ -29,9 +29,9 @@ public class ChangePassword extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtPass = new swing.NPLinkTextField();
-        btnSignUp = new swing.NPLinkButton();
+        btnCfChangePwd = new swing.NPLinkButton();
         jLabel2 = new javax.swing.JLabel();
-        txtPass1 = new swing.NPLinkTextField();
+        txtRePass = new swing.NPLinkTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,28 +51,28 @@ public class ChangePassword extends javax.swing.JPanel {
             }
         });
 
-        btnSignUp.setText("Confirm");
-        btnSignUp.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnSignUp.setColor(new java.awt.Color(250, 229, 199));
-        btnSignUp.setColorClick(new java.awt.Color(250, 229, 199));
-        btnSignUp.setColorOver(new java.awt.Color(247, 205, 139));
-        btnSignUp.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnSignUp.setRadius(37);
-        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+        btnCfChangePwd.setText("Confirm");
+        btnCfChangePwd.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnCfChangePwd.setColor(new java.awt.Color(250, 229, 199));
+        btnCfChangePwd.setColorClick(new java.awt.Color(250, 229, 199));
+        btnCfChangePwd.setColorOver(new java.awt.Color(247, 205, 139));
+        btnCfChangePwd.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnCfChangePwd.setRadius(37);
+        btnCfChangePwd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignUpActionPerformed(evt);
+                btnCfChangePwdActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel2.setText("Input your password again");
 
-        txtPass1.setBorderFocus(new java.awt.Color(232, 158, 39));
-        txtPass1.setBorderOff(new java.awt.Color(204, 204, 204));
-        txtPass1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        txtPass1.addActionListener(new java.awt.event.ActionListener() {
+        txtRePass.setBorderFocus(new java.awt.Color(232, 158, 39));
+        txtRePass.setBorderOff(new java.awt.Color(204, 204, 204));
+        txtRePass.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtRePass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPass1ActionPerformed(evt);
+                txtRePassActionPerformed(evt);
             }
         });
 
@@ -86,9 +86,9 @@ public class ChangePassword extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPass1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtRePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
-                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCfChangePwd, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,9 +103,9 @@ public class ChangePassword extends javax.swing.JPanel {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtRePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
-                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCfChangePwd, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(136, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -114,22 +114,22 @@ public class ChangePassword extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+    private void btnCfChangePwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCfChangePwdActionPerformed
         // if pressed update info -> update info panel
         // if pressed change password -> change pwd panel
-    }//GEN-LAST:event_btnSignUpActionPerformed
+    }//GEN-LAST:event_btnCfChangePwdActionPerformed
 
-    private void txtPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPass1ActionPerformed
+    private void txtRePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRePassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPass1ActionPerformed
+    }//GEN-LAST:event_txtRePassActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.NPLinkButton btnSignUp;
+    private swing.NPLinkButton btnCfChangePwd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private swing.NPLinkTextField txtPass;
-    private swing.NPLinkTextField txtPass1;
+    private swing.NPLinkTextField txtRePass;
     // End of variables declaration//GEN-END:variables
 }

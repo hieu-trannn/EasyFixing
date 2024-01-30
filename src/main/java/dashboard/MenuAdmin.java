@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package dashboardCustomer;
+package dashboard;
 
-import dashboardAdmin.*;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -20,7 +19,7 @@ import ultis.EventMenuSelected;
  *
  * @author delini
  */
-public class MenuCustomer extends javax.swing.JPanel {
+public class MenuAdmin extends javax.swing.JPanel {
 
     private Color topColor = new Color(250, 236, 212);
     private Color botColor = new Color(245, 195, 118);
@@ -30,7 +29,7 @@ public class MenuCustomer extends javax.swing.JPanel {
     /**
      * Creates new form Menu
      */
-    public MenuCustomer() {
+    public MenuAdmin() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
@@ -44,10 +43,9 @@ public class MenuCustomer extends javax.swing.JPanel {
 
     public void init() {
         listMenu1.addItem(new ModelMenu(null, " ", ModelMenu.MenuType.EMPTY));
-        listMenu1.addItem(new ModelMenu(null, "Create New Order", ModelMenu.MenuType.MENU));  // new ImageIcon("path/to/your/image.png");
-        listMenu1.addItem(new ModelMenu(null, "Current Order", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu(null, "History", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu(null, "Feedback", ModelMenu.MenuType.MENU));
+        listMenu1.addItem(new ModelMenu(null, "User Management", ModelMenu.MenuType.MENU));  // new ImageIcon("path/to/your/image.png");
+        listMenu1.addItem(new ModelMenu(null, "Update Service", ModelMenu.MenuType.MENU));
+        listMenu1.addItem(new ModelMenu(null, "Statistic Information", ModelMenu.MenuType.MENU));
         listMenu1.addItem(new ModelMenu(null, " ", ModelMenu.MenuType.EMPTY));
         listMenu1.addItem(new ModelMenu(null, "Personal Management", ModelMenu.MenuType.TITLE));
         listMenu1.addItem(new ModelMenu(null, " ", ModelMenu.MenuType.EMPTY));
@@ -101,7 +99,7 @@ public class MenuCustomer extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 3, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Welcome Customer!");
+        jLabel2.setText("Welcome Admin!");
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);

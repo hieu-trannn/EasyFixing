@@ -2,20 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package dashboardAdmin;
+package adminUserManagement;
 
 /**
  *
- * @author delini
+ * @author hieut
  */
-public class SamplePanel extends javax.swing.JPanel {
+public class DeleteUser extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanel
+     * Creates new form DeleteUser
      */
-    public SamplePanel(String panelName) {
+    public DeleteUser() {
         initComponents();
-        labelName.setText("Panel " + panelName);
     }
 
     /**
@@ -27,33 +26,19 @@ public class SamplePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelName = new javax.swing.JLabel();
-
-        setOpaque(false);
-
-        labelName.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        labelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelName.setText("Panel 1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(labelName)
-                .addContainerGap(216, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelName;
     // End of variables declaration//GEN-END:variables
 }

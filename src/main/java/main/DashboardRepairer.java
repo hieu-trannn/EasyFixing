@@ -4,8 +4,8 @@
  */
 package main;
 
-import dashboardAdmin.MenuAdmin;
-import dashboardAdmin.SamplePanel;
+import dashboard.MenuAdmin;
+import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
@@ -84,9 +84,9 @@ public class DashboardRepairer extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new swing.PanelBorder();
-        search = new dashboardAdmin.HeaderBar();
+        search = new dashboard.HeaderBar();
         bodyPanel = new javax.swing.JPanel();
-        menu = new dashboardRepairer.MenuRepairer();
+        menu = new dashboard.MenuRepairer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -187,8 +187,8 @@ public class DashboardRepairer extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
-    private dashboardRepairer.MenuRepairer menu;
+    private dashboard.MenuRepairer menu;
     private swing.PanelBorder panelBorder1;
-    private dashboardAdmin.HeaderBar search;
+    private dashboard.HeaderBar search;
     // End of variables declaration//GEN-END:variables
 }

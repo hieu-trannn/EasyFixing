@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserManagement;
+package personalManagement;
 
 /**
  *
  * @author hieut
  */
-public class UserManagement extends javax.swing.JPanel {
+public class PersonalManagement extends javax.swing.JPanel {
     private int UserID;
     /**
      * Creates new form UserManagement
      */
-    public UserManagement(int userid) {
+    public PersonalManagement(int userid) {
         initComponents();
         UserID = userid;
     }

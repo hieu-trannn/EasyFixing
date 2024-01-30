@@ -4,7 +4,7 @@
  */
 package main;
 
-import dashboardAdmin.SamplePanel;
+import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
@@ -86,9 +86,9 @@ private void setPanel(JComponent com) {
     private void initComponents() {
 
         panelBorder1 = new swing.PanelBorder();
-        search = new dashboardAdmin.HeaderBar();
+        search = new dashboard.HeaderBar();
         bodyPanel = new javax.swing.JPanel();
-        menu = new dashboardCustomer.MenuCustomer();
+        menu = new dashboard.MenuCustomer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -196,8 +196,8 @@ private void setPanel(JComponent com) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
-    private dashboardCustomer.MenuCustomer menu;
+    private dashboard.MenuCustomer menu;
     private swing.PanelBorder panelBorder1;
-    private dashboardAdmin.HeaderBar search;
+    private dashboard.HeaderBar search;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,7 +2,7 @@
  * @author delini
  */
 
-package dashboardAdmin;
+package dashboard;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

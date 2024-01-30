@@ -66,7 +66,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="dashboardAdmin.MenuAdmin" name="menu">
+        <Component class="dashboard.MenuAdmin" name="menu">
           <Properties>
             <Property name="botColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ad" green="e1" red="f7" type="rgb"/>
@@ -76,7 +76,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="dashboardAdmin.HeaderBar" name="search">
+        <Component class="dashboard.HeaderBar" name="search">
         </Component>
         <Container class="javax.swing.JPanel" name="bodyPanel">
           <Properties>

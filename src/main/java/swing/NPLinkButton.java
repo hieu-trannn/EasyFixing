@@ -154,6 +154,59 @@ public class NPLinkButton extends JButton{
 
         });
     }
+    //customize for HieuScrollPane
+    public NPLinkButton(String text) {
+        setContentAreaFilled(false);
+        setText(text);
+        
+        setBorderColor(new java.awt.Color(247, 205, 139));
+        setColor(new java.awt.Color(250, 229, 199));
+        setColorOver(new java.awt.Color(247, 205, 139));
+        setColorClick(new java.awt.Color(250, 229, 199));
+        setFont(new java.awt.Font("Liberation Sans", 0, 20));
+        setRadius(37);
+        
+//        btnSignUp.setText("Sign up");
+//        btnSignUp.setBorderColor(new java.awt.Color(247, 205, 139));
+//        btnSignUp.setColor(new java.awt.Color(250, 229, 199));
+//        btnSignUp.setColorClick(new java.awt.Color(250, 229, 199));
+//        btnSignUp.setColorOver(new java.awt.Color(247, 205, 139));
+//        btnSignUp.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+//        btnSignUp.setRadius(37);
+        
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                setBackground(getColorOver());
+                setOver(true);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                setBackground(getColor());
+                setOver(false);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+                if (SwingUtilities.isLeftMouseButton(me)) {
+                    setBackground(getColorClick());
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                if (SwingUtilities.isLeftMouseButton(me)) {
+                    if (isOver()) {
+                        setBackground(getColorOver());
+                    } else {
+                        setBackground(getColor());
+                    }
+                }
+            }
+
+        });
+    }
 
     @Override
     protected void paintComponent(Graphics grphcs) {

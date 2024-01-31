@@ -43,6 +43,13 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             @Override
             public void onAccept(int row) {
                 System.out.println("Pressed Accept");
+                int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
+                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+                try {
+                    dtb_query.updateStateOrder(id, 2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
                 model.removeRow(row);
             }
@@ -53,6 +60,13 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
                 if (tableOrder.isEditing()) {
                     tableOrder.getCellEditor().stopCellEditing();
                 }
+                int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
+                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+                try {
+                    dtb_query.updateStateOrder(id, 1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
                 model.removeRow(row);
             }
@@ -62,15 +76,19 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         try {
             Vector<Vector> data = dtb_query.getListOrder(1);
             for (Vector rowData : data) {
-                int rowIndex = tableOrder.getRowCount() - 1;
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), "Placeholder"});
+                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), "Placeholder", (int) rowData.get(3)});
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
+        // Set the ID as an invisible column
+        tableOrder.getColumn("ID").setMaxWidth(0);
+        tableOrder.getColumn("ID").setMinWidth(0);
+        tableOrder.getColumn("ID").setPreferredWidth(0);
+        tableOrder.getColumn("ID").setWidth(0);
+
         tableOrder.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
         tableOrder.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
     }
@@ -111,11 +129,11 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Service", "Prize", "Status"
+                "Customer", "Service", "Prize", "Status", "ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -129,6 +147,11 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         tableOrder.setShowGrid(false);
         tableOrder.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableOrder);
+        if (tableOrder.getColumnModel().getColumnCount() > 0) {
+            tableOrder.getColumnModel().getColumn(3).setResizable(false);
+            tableOrder.getColumnModel().getColumn(4).setResizable(false);
+            tableOrder.getColumnModel().getColumn(4).setPreferredWidth(0);
+        }
 
         panelBorder1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panelBorder1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);

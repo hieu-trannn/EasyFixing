@@ -238,17 +238,28 @@ public class Ca4JDBCMaven {
             ResultSet resultSet = preparedStatement.executeQuery();
             Vector<Vector> data = new Vector();
             while (resultSet.next()) {
-                if (resultSet.getInt("TrangThai")==0) {
+                if (resultSet.getInt("TrangThai") == 0) {
                     Vector row = new Vector();
                     int idCustomer = resultSet.getInt("IDKhachHang");
                     int idService = resultSet.getInt("IDDichVu");
-                    row.add(getName(idCustomer));
-                    row.add(getServiceName(idService));
-                    row.add(resultSet.getInt("TongTien"));
+                    row.add(getName(idCustomer));   //0
+                    row.add(getServiceName(idService)); //1
+                    row.add(resultSet.getInt("TongTien"));  //2
+                    row.add(resultSet.getInt("IDDonHang")); //3
                     data.add(row);
                 }
             }
             return data;
+        }
+    }
+
+    public void updateStateOrder(int idOrder, int state) throws SQLException {
+        String updatePasswordQuery = "UPDATE DonSuaChua SET TrangThai = ? WHERE IDDonHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement updatePasswordStatement = con.prepareStatement(updatePasswordQuery)) {
+            updatePasswordStatement.setInt(1, state);
+            updatePasswordStatement.setInt(2, idOrder);
+            updatePasswordStatement.executeUpdate();
         }
     }
 }

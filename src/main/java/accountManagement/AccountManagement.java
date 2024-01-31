@@ -23,7 +23,13 @@ public class AccountManagement extends javax.swing.JPanel {
     public void addEventChangePass(ActionListener event) {
         btnChangePass.addActionListener(event);
     }
-   
+    
+    public void addEventUpdateInfo(ActionListener event) {
+        btnUpdate.addActionListener(event);
+    }
+    public void addEventDeleteAccount(ActionListener event) {
+        btnDelete.addActionListener(event);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

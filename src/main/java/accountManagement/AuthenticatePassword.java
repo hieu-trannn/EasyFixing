@@ -14,11 +14,14 @@ public class AuthenticatePassword extends javax.swing.JPanel {
 
     /**
      * Creates new form AuthenticatePassword
+     * @param type
      */
-    public AuthenticatePassword(String pwd) {
+    // type = 0,1,2: Update Information, ChangePassword, DeleteAccount
+    
+    public AuthenticatePassword(int type) {
         initComponents();
         txtPass.grabFocus();
-        referencePass = pwd;
+        srvType = type;
         labelWrongPass.setVisible(false);
     }
 
@@ -109,15 +112,15 @@ public class AuthenticatePassword extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jLabel3)
-                .addGap(141, 141, 141)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelWrongPass)
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
+                .addComponent(labelWrongPass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,7 +139,14 @@ public class AuthenticatePassword extends javax.swing.JPanel {
     public void setReferencePass(String pwd) {
         this.referencePass = pwd;
     }
+    public int getServiceType() {
+        return this.srvType;
+    }
+    public void setServiceType(int srvty) {
+        this.srvType = srvty;
+    }
 
+    private int srvType;
     private String referencePass;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnConfirm;

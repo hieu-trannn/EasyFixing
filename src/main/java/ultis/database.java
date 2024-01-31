@@ -19,9 +19,9 @@ import java.util.Vector;
  *
  * @author Admin
  */
-public class Ca4JDBCMaven {
+public class database {
 
-    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=sa;password=NPLink1612";
+    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
 
     public void main(String[] args) throws ParseException {
         try (Connection con = DriverManager.getConnection(ConnectionUrl); Statement stmt = con.createStatement();) {
@@ -262,4 +262,113 @@ public class Ca4JDBCMaven {
             updatePasswordStatement.executeUpdate();
         }
     }
+
+    // for update password with userid
+    public void updatePassword(int userid, String newPassword) throws SQLException {
+        String updatePasswordQuery = "UPDATE NguoiDung SET MatKhau = ? WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement updatePasswordStatement = con.prepareStatement(updatePasswordQuery)) {
+            updatePasswordStatement.setString(1, newPassword);
+            updatePasswordStatement.setInt(2, userid);
+            updatePasswordStatement.executeUpdate();
+        }
+    }
+
+    //for delete account
+    public void deleteAccount(int userid) throws SQLException {
+        // Câu lệnh SQL kiểm tra xem ID có tồn tại không 
+        String checkAdminSql = "SELECT 1 FROM NguoiQuanLy WHERE IDNguoiDung= ?";
+        String checkCustomerSql = "SELECT 1 FROM KhachHang WHERE IDNguoiDung = ?";
+        String checkWorkerSql = "SELECT 1 FROM Tho WHERE IDNguoiDung = ?";
+        // Câu lệnh SQL DELETE cho bảng khách hàng
+        String deleteUserSql = "DELETE FROM NguoiDung WHERE IDNguoiDung = ?";
+        // Câu lệnh SQL DELETE cho bảng quản lý
+        String deleteAdminSql = "DELETE FROM NguoiQuanLy WHERE IDNguoiDung = ?";
+        // Câu lệnh SQL DELETE cho bảng thợ 
+        String deleteWorkerSql = "DELETE FROM Tho WHERE IDNguoiDung = ?";
+        String deleteCustomerSql = "DELETE FROM KhachHang WHERE IDNguoiDung = ?";
+
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement checkCustomerStatement = con.prepareStatement(checkCustomerSql); PreparedStatement checkAdminStatement = con.prepareStatement(checkAdminSql); PreparedStatement checkWorkerStatement = con.prepareStatement(checkWorkerSql); PreparedStatement deleteUserStatement = con.prepareStatement(deleteUserSql); PreparedStatement deleteAdminStatement = con.prepareStatement(deleteAdminSql); PreparedStatement deleteWorkerStatement = con.prepareStatement(deleteWorkerSql); PreparedStatement deleteCustomerStatement = con.prepareStatement(deleteCustomerSql)) {
+
+            // Thiết lập giá trị cho tham số trong câu lệnh SQL cho cả hai bảng
+            checkAdminStatement.setInt(1, userid);
+            checkWorkerStatement.setInt(1, userid);
+            checkCustomerStatement.setInt(1, userid);
+            deleteUserStatement.setInt(1, userid);
+            deleteAdminStatement.setInt(1, userid);
+            deleteWorkerStatement.setInt(1, userid);
+            deleteCustomerStatement.setInt(1, userid);
+
+//            deleteUserStatement.executeQuery();
+            // Kiểm tra xem ID có tồn tại trong bảng khách hàng không
+            try (ResultSet userResultSet = checkCustomerStatement.executeQuery()) {
+                if (userResultSet.next()) {
+                    // ID tồn tại trong bảng khách hàng, thực hiện xóa
+                    deleteCustomerStatement.executeUpdate();
+                    System.out.println("Xóa tài khoản khách hàng thành công!");
+                    return; // Kết thúc chương trình sau khi xóa
+                }
+            }
+
+            // Kiểm tra xem ID có tồn tại trong bảng quản lý không
+            try (ResultSet adminResultSet = checkAdminStatement.executeQuery()) {
+                if (adminResultSet.next()) {
+                    // ID tồn tại trong bảng quản lý, thực hiện xóa
+                    deleteAdminStatement.executeUpdate();
+                    System.out.println("Xóa tài khoản customer thành công!");
+                } else {
+                    System.out.println("Không tìm thấy tài khoản với ID cung cấp.");
+                }
+            }
+            try (ResultSet workerResultSet = checkWorkerStatement.executeQuery()) {
+                if (workerResultSet.next()) {
+                    // ID tồn tại trong bảng quản lý, thực hiện xóa
+                    deleteAdminStatement.executeUpdate();
+                    System.out.println("Xóa tài khoản Worker thành công!");
+                } else {
+                    System.out.println("Không tìm thấy tài khoản với ID cung cấp.");
+                }
+            }
+            deleteUserStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getEmail(int id) throws SQLException {
+        String query = "SELECT Email FROM NguoiDung WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        System.out.println("userid:" + id);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+//                System.out.println(resultSet.getString("MatKhau"));
+                return resultSet.getString("Email");
+            } else {
+                return null;
+            }
+        }
+    }
+
+    // update customer and admin
+    public void updateCustomer(String HoTen, String DiaChiChiTiet, String SDT, String MatKhau, String email, String CCCD, int PhuongXa, String sNgaySinh, int userid) throws SQLException, ParseException {
+        String query = "Update NguoiDung SET MatKhau = ?, HoTen = ?, NgaySinh = ?, SoCCCD = ?, Email = ?, SoDienThoai = ?, DiaChiChiTiet = ?, IDPhuongXa =? Where IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement updatePasswordStatement = con.prepareStatement(query)) {
+            updatePasswordStatement.setString(1, MatKhau);
+            updatePasswordStatement.setString(2, HoTen);
+            updatePasswordStatement.setString(3, sNgaySinh);
+            updatePasswordStatement.setString(4, CCCD);
+            updatePasswordStatement.setString(5, email);
+            updatePasswordStatement.setString(6, SDT);
+            updatePasswordStatement.setString(7, DiaChiChiTiet);
+            updatePasswordStatement.setInt(8, PhuongXa);
+            updatePasswordStatement.setInt(9, userid);
+            updatePasswordStatement.executeUpdate();
+        }
+    }
+
 }

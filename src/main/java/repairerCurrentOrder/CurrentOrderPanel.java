@@ -16,7 +16,7 @@ import javax.swing.table.JTableHeader;
 import repairerCurrentOrder.TableActionCellEditor;
 import repairerCurrentOrder.TableActionCellRender;
 import repairerCurrentOrder.TableActionEvent;
-import ultis.Ca4JDBCMaven;
+import ultis.database;
 
 /**
  *
@@ -44,7 +44,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             public void onAccept(int row) {
                 System.out.println("Pressed Accept");
                 int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+                database dtb_query = new database();
                 try {
                     dtb_query.updateStateOrder(id, 2);
                 } catch (SQLException ex) {
@@ -61,7 +61,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
                     tableOrder.getCellEditor().stopCellEditing();
                 }
                 int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+                database dtb_query = new database();
                 try {
                     dtb_query.updateStateOrder(id, 1);
                 } catch (SQLException ex) {
@@ -72,7 +72,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             }
         };
 
-        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+        database dtb_query = new database();
         try {
             Vector<Vector> data = dtb_query.getListOrder(1);
             for (Vector rowData : data) {

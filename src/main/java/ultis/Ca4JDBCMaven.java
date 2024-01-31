@@ -21,7 +21,7 @@ import java.util.Vector;
  */
 public class Ca4JDBCMaven {
 
-    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
+    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=sa;password=NPLink1612";
 
     public void main(String[] args) throws ParseException {
 //        String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=easyfixing1;user=sa;password=12345678";
@@ -197,21 +197,6 @@ public class Ca4JDBCMaven {
             return data;
         }
     }
-    public String getPassword(int id) throws SQLException {
-        String query = "SELECT MatKhau FROM NguoiDung WHERE IDNguoiDung = ?";
-        Connection con = DriverManager.getConnection(ConnectionUrl);
-        System.out.println("userid:"+ id);
-        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            String pwd = null;
-            if (resultSet.next()) {
-                pwd = resultSet.getString("MatKhau");
-            }
-            System.out.println(pwd);
-            return pwd;
-        }
-    }
 
     public void updatePassword(String email, String newPassword) throws SQLException {
         String updatePasswordQuery = "UPDATE NguoiDung SET MatKhau = ? WHERE Email = ?";
@@ -223,4 +208,18 @@ public class Ca4JDBCMaven {
         }
     }
     
+        public String getPassword(int id) throws SQLException {
+        String query = "SELECT MatKhau FROM NguoiDung WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        System.out.println("userid:"+ id);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                System.out.println(resultSet.getString("MatKhau"));
+                return resultSet.getString("MatKhau");
+            }
+            else return null;
+        }
+    }
 }

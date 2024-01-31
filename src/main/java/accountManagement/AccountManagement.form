@@ -27,9 +27,9 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="385" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="btnSubmit" alignment="2" max="32767" attributes="0"/>
-                  <Component id="btnSubmit1" alignment="2" max="32767" attributes="0"/>
-                  <Component id="btnSubmit2" alignment="2" pref="413" max="32767" attributes="0"/>
+                  <Component id="btnChangePass" alignment="2" max="32767" attributes="0"/>
+                  <Component id="btnDelete" alignment="2" max="32767" attributes="0"/>
+                  <Component id="btnUpdate" alignment="2" pref="413" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
           </Group>
@@ -39,18 +39,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
-              <Component id="btnSubmit2" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="btnUpdate" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-              <Component id="btnSubmit" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="btnChangePass" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-              <Component id="btnSubmit1" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="btnDelete" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="swing.NPLinkButton" name="btnSubmit">
+    <Component class="swing.NPLinkButton" name="btnChangePass">
       <Properties>
         <Property name="text" type="java.lang.String" value="Change Password"/>
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -71,10 +71,10 @@
         <Property name="radius" type="int" value="37"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmitActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangePassActionPerformed"/>
       </Events>
     </Component>
-    <Component class="swing.NPLinkButton" name="btnSubmit1">
+    <Component class="swing.NPLinkButton" name="btnDelete">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Account"/>
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -95,10 +95,10 @@
         <Property name="radius" type="int" value="37"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmit1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
     </Component>
-    <Component class="swing.NPLinkButton" name="btnSubmit2">
+    <Component class="swing.NPLinkButton" name="btnUpdate">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Information"/>
         <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -119,7 +119,7 @@
         <Property name="radius" type="int" value="37"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmit2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

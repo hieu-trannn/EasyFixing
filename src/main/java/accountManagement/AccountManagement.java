@@ -4,13 +4,7 @@
  */
 package accountManagement;
 
-import java.awt.CardLayout;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComponent;
-import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -23,8 +17,13 @@ public class AccountManagement extends javax.swing.JPanel {
      */
     public AccountManagement(int userid) {
         initComponents();
-        UserID = userid;
+        setUserID(userid);
     }
+
+    public void addEventChangePass(ActionListener event) {
+        btnChangePass.addActionListener(event);
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,49 +34,49 @@ public class AccountManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSubmit = new swing.NPLinkButton();
-        btnSubmit1 = new swing.NPLinkButton();
-        btnSubmit2 = new swing.NPLinkButton();
+        btnChangePass = new swing.NPLinkButton();
+        btnDelete = new swing.NPLinkButton();
+        btnUpdate = new swing.NPLinkButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1115, 841));
 
-        btnSubmit.setText("Change Password");
-        btnSubmit.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnSubmit.setColor(new java.awt.Color(250, 229, 199));
-        btnSubmit.setColorClick(new java.awt.Color(250, 229, 199));
-        btnSubmit.setColorOver(new java.awt.Color(247, 205, 139));
-        btnSubmit.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnSubmit.setRadius(37);
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnChangePass.setText("Change Password");
+        btnChangePass.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnChangePass.setColor(new java.awt.Color(250, 229, 199));
+        btnChangePass.setColorClick(new java.awt.Color(250, 229, 199));
+        btnChangePass.setColorOver(new java.awt.Color(247, 205, 139));
+        btnChangePass.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnChangePass.setRadius(37);
+        btnChangePass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+                btnChangePassActionPerformed(evt);
             }
         });
 
-        btnSubmit1.setText("Delete Account");
-        btnSubmit1.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnSubmit1.setColor(new java.awt.Color(250, 229, 199));
-        btnSubmit1.setColorClick(new java.awt.Color(250, 229, 199));
-        btnSubmit1.setColorOver(new java.awt.Color(247, 205, 139));
-        btnSubmit1.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnSubmit1.setRadius(37);
-        btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete Account");
+        btnDelete.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnDelete.setColor(new java.awt.Color(250, 229, 199));
+        btnDelete.setColorClick(new java.awt.Color(250, 229, 199));
+        btnDelete.setColorOver(new java.awt.Color(247, 205, 139));
+        btnDelete.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnDelete.setRadius(37);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmit1ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnSubmit2.setText("Update Information");
-        btnSubmit2.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnSubmit2.setColor(new java.awt.Color(250, 229, 199));
-        btnSubmit2.setColorClick(new java.awt.Color(250, 229, 199));
-        btnSubmit2.setColorOver(new java.awt.Color(247, 205, 139));
-        btnSubmit2.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnSubmit2.setRadius(37);
-        btnSubmit2.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Update Information");
+        btnUpdate.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnUpdate.setColor(new java.awt.Color(250, 229, 199));
+        btnUpdate.setColorClick(new java.awt.Color(250, 229, 199));
+        btnUpdate.setColorOver(new java.awt.Color(247, 205, 139));
+        btnUpdate.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnUpdate.setRadius(37);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmit2ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -88,52 +87,37 @@ public class AccountManagement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(385, 385, 385)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSubmit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSubmit2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
+                    .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
                 .addGap(317, 317, 317))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(194, 194, 194)
-                .addComponent(btnSubmit2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
-                .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(183, 183, 183))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnSubmitActionPerformed
+    }//GEN-LAST:event_btnChangePassActionPerformed
 
-    private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSubmit1ActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnSubmit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit2ActionPerformed
-        // TODO add your handling code here:
-        Ca4JDBCMaven db = new Ca4JDBCMaven();
-        try {
-            String resultPwd = db.getPassword(getUserID());
-            setPanel(new AuthenticatePassword(resultPwd));  //              BUGGGGG
-//            this.setVisible(false);
-//            authenticatePasswordPanel.setVisible(true);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSubmit2ActionPerformed
-    private void setPanel(JComponent com) {
-        this.removeAll();
-        this.add(com);
-        this.repaint();
-        this.revalidate();
-    }
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     public int getUserID() {
         return this.UserID;
     }
@@ -144,8 +128,8 @@ public class AccountManagement extends javax.swing.JPanel {
 
     private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.NPLinkButton btnSubmit;
-    private swing.NPLinkButton btnSubmit1;
-    private swing.NPLinkButton btnSubmit2;
+    private swing.NPLinkButton btnChangePass;
+    private swing.NPLinkButton btnDelete;
+    private swing.NPLinkButton btnUpdate;
     // End of variables declaration//GEN-END:variables
 }

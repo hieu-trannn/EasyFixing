@@ -128,7 +128,6 @@ public class LoginMainFrame extends javax.swing.JFrame {
             } else {
                 slide.show(1);
             }
-//            register.register();
         });
     }
 

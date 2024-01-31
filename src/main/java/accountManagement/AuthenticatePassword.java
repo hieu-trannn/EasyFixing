@@ -4,6 +4,8 @@
  */
 package accountManagement;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author hieut
@@ -15,7 +17,26 @@ public class AuthenticatePassword extends javax.swing.JPanel {
      */
     public AuthenticatePassword(String pwd) {
         initComponents();
-        PassWord = pwd;
+        txtPass.grabFocus();
+        referencePass = pwd;
+        labelWrongPass.setVisible(false);
+    }
+
+    public void setLabelWrongPass(String text, Boolean visible) {
+        if (text != null) {
+            labelWrongPass.setText(text);
+        }
+        if (visible != null) {
+            labelWrongPass.setVisible(visible);
+        }
+    }
+
+    public void addEventConfirm(ActionListener event) {
+        btnConfirm.addActionListener(event);
+    }
+
+    public String getUserPass() {
+        return txtPass.getText();
     }
 
     /**
@@ -30,7 +51,8 @@ public class AuthenticatePassword extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtPass = new swing.NPLinkTextField();
-        btnSignUp = new swing.NPLinkButton();
+        btnConfirm = new swing.NPLinkButton();
+        labelWrongPass = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1115, 841));
@@ -51,18 +73,22 @@ public class AuthenticatePassword extends javax.swing.JPanel {
             }
         });
 
-        btnSignUp.setText("Confirm");
-        btnSignUp.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnSignUp.setColor(new java.awt.Color(250, 229, 199));
-        btnSignUp.setColorClick(new java.awt.Color(250, 229, 199));
-        btnSignUp.setColorOver(new java.awt.Color(247, 205, 139));
-        btnSignUp.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnSignUp.setRadius(37);
-        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setText("Confirm");
+        btnConfirm.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnConfirm.setColor(new java.awt.Color(250, 229, 199));
+        btnConfirm.setColorClick(new java.awt.Color(250, 229, 199));
+        btnConfirm.setColorOver(new java.awt.Color(247, 205, 139));
+        btnConfirm.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnConfirm.setRadius(37);
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignUpActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
+
+        labelWrongPass.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelWrongPass.setForeground(new java.awt.Color(255, 0, 51));
+        labelWrongPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,7 +100,8 @@ public class AuthenticatePassword extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelWrongPass, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
@@ -86,9 +113,11 @@ public class AuthenticatePassword extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelWrongPass)
+                .addGap(32, 32, 32)
+                .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(349, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -96,25 +125,24 @@ public class AuthenticatePassword extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-        // if pressed update info -> update info panel
-        // if pressed change password -> change pwd panel
-    }//GEN-LAST:event_btnSignUpActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+       
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
-    public String getPassWord()
-    {
-        return this.PassWord;
+    public String getReferencePass() {
+        return this.referencePass;
     }
-    public void setPassWord(String pwd)
-    {
-        this.PassWord = pwd;
+
+    public void setReferencePass(String pwd) {
+        this.referencePass = pwd;
     }
-    
-    private String PassWord;
+
+    private String referencePass;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.NPLinkButton btnSignUp;
+    private swing.NPLinkButton btnConfirm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel labelWrongPass;
     private swing.NPLinkTextField txtPass;
     // End of variables declaration//GEN-END:variables
 }

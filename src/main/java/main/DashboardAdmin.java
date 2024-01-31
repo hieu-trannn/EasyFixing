@@ -5,12 +5,16 @@
 package main;
 
 import accountManagement.AccountManagement;
-import dashboard.MenuAdmin;
+import accountManagement.AuthenticatePassword;
+import accountManagement.ChangePassword;
 import dashboard.SamplePanel;
-import java.awt.Color;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
+import login.LoginPanel;
+import ultis.Ca4JDBCMaven;
 import ultis.EventMenuSelected;
 
 /**
@@ -24,8 +28,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
      */
     // Declare Panel here
     private int userId;
-//    private AccountManagement AccountManagmentJPanel =new AccountManagement(getUserId()) ;
-//    private JPanel SearchRepairJPanel, NoticeManagementJPanel, UserManagementJPanel, UpdateServiceJPanel, StatisticInformationJPanel;
+    private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private AccountManagement panelAccMana;
+    private AuthenticatePassword panelAuthen = new AuthenticatePassword("");
+    private ChangePassword panelChangePass;
 
     public DashboardAdmin(int userId) {
         initComponents();
@@ -33,6 +39,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
 
+        panel1 = new SamplePanel("1");
+        panel2 = new SamplePanel("2");
+        panel3 = new SamplePanel("3");
+        panel4 = new SamplePanel("4");
+        panel5 = new SamplePanel("5");
+        panelAccMana = new AccountManagement(getUserId());
+        panelChangePass = new ChangePassword(getUserId());
+        
         menu.initMoving(DashboardAdmin.this);
 
         menu.addEventMenuSelected(
@@ -41,22 +55,20 @@ public class DashboardAdmin extends javax.swing.JFrame {
             public void selected(int index
             ) {
                 switch (index) {
-//                    case 1:
-//                        setPanel();
-//                        break;
-//                    case 2:
-//                        setPanel(SearchRepairJPanel);
-//                        break;
-//                    case 3:
-//                        setPanel(NoticeManagementJPanel);
-//                        break;
-//                    case 4:
-//                        setPanel(UserManagementJPanel);
-//                        break;
-//                    case 5:
-//                        setPanel(UpdateServiceJPanel);
+                    case 1:
+                        setPanel(panel1);
+                        break;
+                    case 2:
+                        setPanel(panel2);
+                        break;
+                    case 3:
+                        setPanel(panel3);
+                        break;
+                    case 4:
+                        setPanel(panel4);
+                        break;
                     case 7:
-                        setPanel(new AccountManagement(getUserId()));
+                        setPanel(panelAccMana);
                     default:
                         break;
                 }
@@ -64,7 +76,35 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         }
         );
-//        setPanel(panel1);
+
+        panelAccMana.addEventChangePass((ActionEvent ae) -> {
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            try {
+                String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
+                panelAuthen.setReferencePass(referencePass);
+                setPanel(panelAuthen);
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        panelAuthen.addEventConfirm((ActionEvent ae) -> {
+            System.out.println("Pressed confirn button");
+            String userPass = panelAuthen.getUserPass();
+                        System.out.println("Referrence: " + panelAuthen.getReferencePass() + ", Input: " + userPass);
+                        System.out.println(userPass.equals(panelAuthen.getReferencePass()));
+            if (userPass.isEmpty()) {
+            } else {
+                if ((panelAuthen.getReferencePass() != null) && (userPass.equals(panelAuthen.getReferencePass()))) {
+                    panelAuthen.setLabelWrongPass("", false);
+                    setPanel(panelChangePass);
+                } else {
+                    panelAuthen.setLabelWrongPass("Incorect password!", true);
+                }
+            }
+        });
+        
+        setPanel(panel1);
     }
 
     private void setPanel(JComponent com) {
@@ -89,7 +129,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
         panelBorder1.setRadius(15);
 
         menu.setBotColor(new java.awt.Color(247, 225, 173));

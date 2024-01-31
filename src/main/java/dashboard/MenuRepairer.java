@@ -122,6 +122,7 @@ public class MenuRepairer extends javax.swing.JPanel {
         jCheckBox1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("I am busy");
+        jCheckBox1.setFocusPainted(false);
         jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -24,28 +24,8 @@ public class Ca4JDBCMaven {
     public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=sa;password=NPLink1612";
 
     public void main(String[] args) throws ParseException {
-//        String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=easyfixing1;user=sa;password=12345678";
         try (Connection con = DriverManager.getConnection(ConnectionUrl); Statement stmt = con.createStatement();) {
             System.out.println("oke");
-
-////            // 1. Truy vấn các huyện từ tỉnh
-//            queryHuyenByTinh(1);
-////
-////            // 2. Truy vấn các xã từ huyện
-//            queryXaByHuyen(1);
-////
-////            // 3. Kiểm tra email hợp lệ
-//            System.out.println(checkEmailExistence("hehe@example.com"));
-//
-//            // 4. Thêm dữ liệu tài khoản người dùng
-//            addUser("John Doe", "123 Main St", "123456789", "password123", "john@example.com","12345678","1","2002-10-14");
-//
-////            // 5. Truy vấn đăng nhập và lấy UserID
-//            int userId = loginUser("nguoidung1@example.com", "matkhau1");
-//            System.out.println("Logged in UserID: " + userId);
-////
-////            // 6. Truy vấn quên mật khẩu và đặt mật khẩu mới
-//            forgetPassword("nguoidung2@example.com", "newpassword456");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -207,19 +187,79 @@ public class Ca4JDBCMaven {
             updatePasswordStatement.executeUpdate();
         }
     }
-    
-        public String getPassword(int id) throws SQLException {
+
+    public String getPassword(int id) throws SQLException {
         String query = "SELECT MatKhau FROM NguoiDung WHERE IDNguoiDung = ?";
         Connection con = DriverManager.getConnection(ConnectionUrl);
-        System.out.println("userid:"+ id);
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                System.out.println(resultSet.getString("MatKhau"));
                 return resultSet.getString("MatKhau");
+            } else {
+                return null;
             }
-            else return null;
+        }
+    }
+
+    public String getName(int id) throws SQLException {
+        String query = "SELECT * FROM NguoiDung WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("HoTen");
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public String getServiceName(int idService) throws SQLException {
+        String query = "SELECT * FROM LoaiDichVu WHERE IDLoaiDichVu = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idService);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("TenDichVu");
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public Vector getListOrder(int idRepairer) throws SQLException {
+        String query = "SELECT * FROM DonSuaChua WHERE IDTho = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idRepairer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                if (resultSet.getInt("TrangThai") == 0) {
+                    Vector row = new Vector();
+                    int idCustomer = resultSet.getInt("IDKhachHang");
+                    int idService = resultSet.getInt("IDDichVu");
+                    row.add(getName(idCustomer));   //0
+                    row.add(getServiceName(idService)); //1
+                    row.add(resultSet.getInt("TongTien"));  //2
+                    row.add(resultSet.getInt("IDDonHang")); //3
+                    data.add(row);
+                }
+            }
+            return data;
+        }
+    }
+
+    public void updateStateOrder(int idOrder, int state) throws SQLException {
+        String updatePasswordQuery = "UPDATE DonSuaChua SET TrangThai = ? WHERE IDDonHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement updatePasswordStatement = con.prepareStatement(updatePasswordQuery)) {
+            updatePasswordStatement.setInt(1, state);
+            updatePasswordStatement.setInt(2, idOrder);
+            updatePasswordStatement.executeUpdate();
         }
     }
 }

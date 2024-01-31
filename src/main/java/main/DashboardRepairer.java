@@ -9,6 +9,7 @@ import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
+import repairerCurrentOrder.CurrentOrderPanel;
 import ultis.EventMenuSelected;
 
 /**
@@ -22,6 +23,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
      */
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private CurrentOrderPanel panelCurrentOrder;
     private int userId;
 
     public DashboardRepairer(int userId) {
@@ -30,6 +32,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
 
+        panelCurrentOrder = new CurrentOrderPanel(getUserId());
         panel1 = new SamplePanel("1");
         panel2 = new SamplePanel("2");
         panel3 = new SamplePanel("3");
@@ -45,7 +48,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
             ) {
                 switch (index) {
                     case 1:
-                        setPanel(panel1);
+                        setPanel(panelCurrentOrder);
                         break;
                     case 2:
                         setPanel(panel2);
@@ -56,8 +59,15 @@ public class DashboardRepairer extends javax.swing.JFrame {
                     case 4:
                         setPanel(panel4);
                         break;
+                    case 5: 
+                        System.out.println("case 5");
+                        break;
                     case 6:
-                        setPanel(panel5);
+                        System.out.println("case 6");
+                        break;
+                    case 8:
+                        System.out.println("case 8");
+                        break;
                     default:
                         break;
                 }
@@ -65,7 +75,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
             }
         }
         );
-        setPanel(panel1);
+        setPanel(panelCurrentOrder);
     }
 
     private void setPanel(JComponent com) {
@@ -140,6 +150,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

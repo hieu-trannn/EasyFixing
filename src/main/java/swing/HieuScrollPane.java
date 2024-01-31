@@ -177,7 +177,7 @@ public class HieuScrollPane extends JScrollPane {
         // set width and height of each panel in scrollpane
         setPanelDimension(30, 30);
 
-        /* TEST PURPOSE
+//        TEST PURPOSE
         JPanel test = new JPanel();
         test.add(new JLabel("Hiiii"));
         NPLinkButton a = new NPLinkButton("hieu");
@@ -192,7 +192,6 @@ public class HieuScrollPane extends JScrollPane {
         addPanel(labelHistory, 6);
         addPanel(a, b);
         addPanel(test);
-         */
         allPanel.setLayout(new BoxLayout(allPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for vertical layout
     }
 }

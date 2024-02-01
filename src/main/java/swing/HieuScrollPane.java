@@ -71,6 +71,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 2: {
                     buttonPressed(viewBtn, type);
@@ -79,6 +80,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 3: {
                     buttonPressed(viewBtn, type);
@@ -87,6 +89,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 1: {
                     buttonPressed(deleteBtn, type);
@@ -95,6 +98,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 4: {
                     buttonPressed(fbBtn, type);
@@ -103,6 +107,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 // in case: type is not processed
                 default: {
@@ -140,22 +145,26 @@ public class HieuScrollPane extends JScrollPane {
                     System.out.println("update service information and inform user");
                     // code to handle here
                 });
+                break;
 
             case 2:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to bill's detailed information GUI");
                     // code to change interface here
                 });
+                break;
             case 3:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to history's detailed information GUI");
                     // code to change interface here
                 });
+                break;
             case 4:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to feeback GUI");
                     // code to change interface here
                 });
+                break;
             default: {
             }
         }
@@ -178,20 +187,20 @@ public class HieuScrollPane extends JScrollPane {
         setPanelDimension(30, 30);
 
 //        TEST PURPOSE
-        JPanel test = new JPanel();
-        test.add(new JLabel("Hiiii"));
-        NPLinkButton a = new NPLinkButton("hieu");
-        NPLinkButton b = new NPLinkButton("dz");
-        JLabel labelworker = new JLabel("some Worker infomation");
-        JLabel labelService = new JLabel("some service infomation");
-        JLabel labelFeedback = new JLabel("some feedback infomation");
-        JLabel labelHistory = new JLabel("you use fix toilet service");
-        addPanel(labelworker, 2);
-        addPanel(labelService, 1);
-        addPanel(labelFeedback, 4);
-        addPanel(labelHistory, 6);
-        addPanel(a, b);
-        addPanel(test);
+//        JPanel test = new JPanel();
+//        test.add(new JLabel("Hiiii"));
+//        NPLinkButton a = new NPLinkButton("hieu");
+//        NPLinkButton b = new NPLinkButton("dz");
+//        JLabel labelworker = new JLabel("some Worker infomation");
+//        JLabel labelService = new JLabel("some service infomation");
+//        JLabel labelFeedback = new JLabel("some feedback infomation");
+//        JLabel labelHistory = new JLabel("you use fix toilet service");
+//        addPanel(labelworker, 2);
+//        addPanel(labelService, 1);
+//        addPanel(labelFeedback, 4);
+//        addPanel(labelHistory, 6);
+//        addPanel(a, b);
+//        addPanel(test);
         allPanel.setLayout(new BoxLayout(allPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for vertical layout
     }
 }

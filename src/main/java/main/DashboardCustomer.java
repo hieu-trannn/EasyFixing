@@ -18,6 +18,9 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import login.LoginPanel;
+import repairerCustomerFeedback.CustomerFeedback;
+import repairerCustomerFeedback.CustomerFeedbackGUI;
+import repairerCustomerFeedback.CustomerViewHistory;
 import ultis.database;
 import ultis.EventMenuSelected;
 
@@ -37,6 +40,10 @@ public class DashboardCustomer extends javax.swing.JFrame {
     private UpdateInformation panelUpdInfo;
     private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
     private ChangePassword panelChangePass;
+    private CustomerFeedbackGUI panelCusFbGUI;
+    private CustomerFeedback panelCusFb;
+    private CustomerViewHistory panelViewHistory;
+
 
     public DashboardCustomer(int userId) throws SQLException {
         initComponents();
@@ -52,7 +59,10 @@ public class DashboardCustomer extends javax.swing.JFrame {
         panelAccMana = new AccountManagement(getUserId());
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
-        
+        panelCusFbGUI = new CustomerFeedbackGUI(getUserId());
+        panelCusFb = new CustomerFeedback();
+        panelViewHistory = new CustomerViewHistory(userId);
+
         menu.initMoving(DashboardCustomer.this);
 
         menu.addEventMenuSelected(
@@ -71,7 +81,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
                         setPanel(panel3);
                         break;
                     case 4:
-                        setPanel(panel4);
+                        setPanel(panelCusFbGUI);
                         break;
                     case 8:
                         setPanel(panelAccMana);
@@ -107,7 +117,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(panelAccMana, "Please fill up your password");
                 panelAuthen.setLabelWrongPass("Fill up your password!", true);
             } else {
-                if (!userPass.isEmpty()&&userPass.equals(panelAuthen.getReferencePass())) {
+                if (!userPass.isEmpty() && userPass.equals(panelAuthen.getReferencePass())) {
                     // set label if wrong password
                     panelAuthen.setLabelWrongPass("", false);
                     // change panel
@@ -192,9 +202,14 @@ public class DashboardCustomer extends javax.swing.JFrame {
                 Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        panelCusFbGUI.addEventFeedBack((ActionEvent ae) -> {
+            setPanel(panelCusFb);
+        });
+        panelCusFbGUI.addEventViewHistory((ActionEvent ae) -> {
+            setPanel(panelViewHistory);
+        });
         setPanel(panel1);
     }
-    
 
     private void setPanel(JComponent com) {
         bodyPanel.removeAll();

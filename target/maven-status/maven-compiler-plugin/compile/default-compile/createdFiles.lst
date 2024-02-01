@@ -19,11 +19,13 @@ swing\PasswordText.class
 repairerCurrentOrder\StatusPanelAction$2.class
 accountManagement\UpdateInformation$3.class
 repairerCurrentOrder\TableActionEvent.class
+repairerCustomerFeedback\WorkerViewHistory.class
 accountManagement\ChangePassword$1.class
 swing\NPLinkButton$1.class
 swing\PanelGradient$Gradiente.class
 dashboard\MenuRepairer.class
 accountManagement\AccountManagement$1.class
+repairerCustomerFeedback\CustomerFeedbackGUI.class
 accountManagement\UpdateInformation$6.class
 login\LoginPanel$2.class
 dashboard\MenuCustomer$2.class
@@ -36,6 +38,7 @@ repairerCurrentOrder\StatusPanelAction.class
 swing\ListMenu.class
 accountManagement\UpdateInformation$7.class
 swing\ListMenu$2.class
+repairerCustomerFeedback\CustomerViewHistory$2.class
 dashboard\MenuCustomer$1.class
 accountManagement\UpdateInformation$8.class
 accountManagement\UpdateInformation$1.class
@@ -47,15 +50,18 @@ login\LoginPanel$4.class
 repairerCurrentOrder\CurrentOrderPanel.class
 repairerCurrentOrder\TableActionCellEditor.class
 login\RegisterPanel$6.class
+ultis\database.class
 accountManagement\ChangePassword$2.class
 accountManagement\UpdateInformation$2.class
 main\DashboardAdmin$1.class
+repairerCustomerFeedback\CustomerViewHistory$1.class
 repairerCurrentOrder\TableActionCellRender.class
 swing\NPLinkButton$2.class
 accountManagement\AccountManagement$2.class
 dashboard\HeaderBar.class
 login\LoginPanel$3.class
 dashboard\MenuAdmin$1.class
+repairerCustomerFeedback\CustomerFeedbackGUI$1.class
 login\ForgetPassPanel.class
 swing\NPLinkTextField.class
 repairerCurrentOrder\StatusPanelAction$1.class
@@ -72,7 +78,6 @@ swing\NPLinkButton.class
 login\AuthenPanel.class
 accountManagement\ChangePassword.class
 login\ForgetPassPanel$2.class
-ultis\Ca4JDBCMaven.class
 accountManagement\AuthenticatePassword$1.class
 accountManagement\AuthenticatePassword$2.class
 main\DashboardRepairer.class
@@ -87,6 +92,7 @@ login\ForgetPassPanel$3.class
 dashboard\SamplePanel.class
 swing\PanelSlide.class
 swing\PanelBorder.class
+repairerCustomerFeedback\CustomerFeedbackGUI$2.class
 login\RegisterPanel.class
 accountManagement\ChangePassword$3.class
 dashboard\HeaderBar$1.class
@@ -94,7 +100,9 @@ accountManagement\AccountManagement$3.class
 login\RegisterPanel$9.class
 accountManagement\UpdateInformation$5.class
 login\AuthenPanel$1.class
+repairerCustomerFeedback\CustomerViewHistory.class
 swing\HintSearchText.class
 dashboard\ModelMenu.class
+repairerCustomerFeedback\CustomerFeedback.class
 ultis\JavaEmailSender$1.class
 main\LoginMainFrame.class

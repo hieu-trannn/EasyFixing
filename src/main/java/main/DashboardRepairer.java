@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import login.LoginPanel;
 import repairerCurrentOrder.CurrentOrderPanel;
+import repairerCustomerFeedback.WorkerFeedbackHistory;
 import ultis.database;
 import ultis.EventMenuSelected;
 
@@ -39,6 +40,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
     private UpdateInformation panelUpdInfo;
     private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
     private ChangePassword panelChangePass;
+    private WorkerFeedbackHistory panelWorkerFbHis;
     private int userId;
 
     public DashboardRepairer(int userId) throws SQLException {
@@ -56,7 +58,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         panelAccMana = new AccountManagement(getUserId());
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
-
+        panelWorkerFbHis = new WorkerFeedbackHistory(getUserId());
         menu.initMoving(DashboardRepairer.this);
 
         menu.addEventMenuSelected(
@@ -75,7 +77,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
                         setPanel(panel3);
                         break;
                     case 4:
-                        setPanel(panel4);
+                        setPanel(panelWorkerFbHis);
                         break;
                     case 5: 
                         System.out.println("case 5");

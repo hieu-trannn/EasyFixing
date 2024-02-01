@@ -370,5 +370,151 @@ public class database {
             updatePasswordStatement.executeUpdate();
         }
     }
+// get userId from customerID
 
+    public int customer2UserID(int idCustomer) throws SQLException {
+        String query = "Select * FROM KhachHang Where IDKhachHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return (resultSet.getInt("IDNguoiDung"));
+            } else {
+                System.out.println("Không tìm thấy " + idCustomer);
+                return 99;
+            }
+        }
+    }
+
+    // get userId from customerID
+    public int user2CustomerID(int idCustomer) throws SQLException {
+        String query = "Select * FROM KhachHang Where IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            System.out.println(resultSet);
+            if (resultSet.next()) {
+                return (resultSet.getInt("IDKhachHang"));
+            } else {
+                System.out.println("Không tìm thấy " + idCustomer);
+                return 99;
+            }
+//            return resultSet.getInt("IDKhachHang");
+        }
+    }
+
+    // get userId from workerID
+    public int worker2UserID(int idCustomer) throws SQLException {
+        String query = "Select * FROM Tho Where IDTho= ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            return resultSet.getInt("IDNguoiDung");
+//            try (ResultSet resultSet = getUserIdStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return (resultSet.getInt("IDNguoiDung"));
+            } else {
+                System.out.println("Không tìm thấy " + idCustomer);
+                return 99;
+            }
+
+        }
+    }
+
+    // get userId from workerID
+    public int user2WorkerID(int idCustomer) throws SQLException {
+        String query = "Select * FROM Tho Where IDNguoiDung= ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return (resultSet.getInt("IDTho"));
+            } else {
+                System.out.println("Không tìm thấy " + idCustomer);
+                return 99;
+            }
+        }
+    }
+
+    //get Customer's feedbacks list
+    public Vector getCustomerListFeedback(int idCustomer) throws SQLException {
+        String query = "SELECT * FROM PhanHoi WHERE IDKhachHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                Vector row = new Vector();
+                int idWorker = resultSet.getInt("IDTho");
+                int idService = resultSet.getInt("IDDichVu");
+                int userIdFromTho = worker2UserID(idWorker);
+                row.add(getName(userIdFromTho));   //0
+                row.add(getServiceName(idService)); //1
+//                System.out.println("UseridFromTho"+userIdFromTho);
+                row.add(resultSet.getString("DanhGiaTomTat"));  //2
+//                System.out.println(row.get(2));
+                row.add(resultSet.getString("ThoiGianPhanHoi")); //3
+                row.add(resultSet.getInt("DiemDanhGia"));
+                data.add(row);
+            }
+            return data;
+        }
+    }
+    //get Customer's feedbacks list
+    public Vector getWorkerListFeedback(int idWorker) throws SQLException {
+        String query = "SELECT * FROM PhanHoi WHERE IDTho = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idWorker);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                Vector row = new Vector();
+                int idCustomer = resultSet.getInt("IDKhachHang");
+                int idService = resultSet.getInt("IDDichVu");
+                int userIdFromCustomer = customer2UserID(idCustomer);
+                row.add(getName(userIdFromCustomer));   //0
+                row.add(getServiceName(idService)); //1
+//                System.out.println("UseridFromTho"+userIdFromTho);
+                row.add(resultSet.getString("DanhGiaTomTat"));  //2
+//                System.out.println(row.get(2));
+                row.add(resultSet.getString("ThoiGianPhanHoi")); //3
+                row.add(resultSet.getInt("DiemDanhGia"));
+                data.add(row);
+            }
+            return data;
+        }
+    }
+    // feedback for complete bill but not reply
+    public Vector getRemainFeedbackList(int idCustomer) throws SQLException {
+        String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                System.out.println("1");
+                if (resultSet.getInt("TrangThai") == 5) {
+                    Vector row = new Vector();
+                    int idWorker = resultSet.getInt("IDTho");
+                    int idService = resultSet.getInt("IDDichVu");
+                    int workerUserId = worker2UserID(idWorker);
+                    System.out.println("2");
+                    row.add(getName(workerUserId));   //0
+                    System.out.println(row.get(0));
+                    row.add(getServiceName(idService)); //1
+                    row.add(resultSet.getInt("TongTien"));  //2
+                    row.add(resultSet.getString("ThoiGianThanhToan")); //3
+                    data.add(row);
+                }
+            }
+            return data;
+        }
+    }
 }

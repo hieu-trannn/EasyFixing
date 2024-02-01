@@ -60,8 +60,8 @@ public class DashboardCustomer extends javax.swing.JFrame {
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
         panelCusFbGUI = new CustomerFeedbackGUI(getUserId());
-        panelCusFb = new CustomerFeedback();
-        panelViewHistory = new CustomerViewHistory(userId);
+        panelCusFb = new CustomerFeedback(getUserId());
+        panelViewHistory = new CustomerViewHistory(getUserId());
 
         menu.initMoving(DashboardCustomer.this);
 

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 import ultis.JavaEmailSender;
 
 /**
@@ -67,7 +67,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
             if (pass.isEmpty() || email.isEmpty()) {
                 login.setLabelWrongUser("Please provide all needed information!", true);
             } else {
-                database dtb_query = new database();
+                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
                 try {
                     int id = dtb_query.loginUser(email, pass);
                     if (id == -1) {

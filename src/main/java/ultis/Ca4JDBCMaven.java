@@ -19,7 +19,7 @@ import java.util.Vector;
  *
  * @author Admin
  */
-public class database {
+public class Ca4JDBCMaven {
 
     public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
 

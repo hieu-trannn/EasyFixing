@@ -17,7 +17,7 @@ import javax.swing.table.JTableHeader;
 //import repairerCurrentOrder.TableActionCellEditor;
 //import repairerCurrentOrder.TableActionCellRender;
 //import repairerCurrentOrder.TableActionEvent;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -45,7 +45,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
             public void onAccept(int row) {
                 System.out.println("Pressed Accept");
                 int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                database dtb_query = new database();
+                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
                 try {
                     dtb_query.updateStateOrder(id, 2);
                 } catch (SQLException ex) {
@@ -56,7 +56,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
             }
         };
 
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         int idCustomer = dtb_query.user2CustomerID(getUserID());
         try {
             Vector<Vector> data = dtb_query.getRemainFeedbackList(idCustomer);

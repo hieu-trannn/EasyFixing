@@ -15,7 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import login.AuthenPanel;
 import login.LoginPanel;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -33,7 +33,7 @@ public class UpdateInformation extends javax.swing.JPanel {
         UserID = userid;
         updateProvince();
         labelWarning.setVisible(false);
-        database db = new database();
+        Ca4JDBCMaven db = new Ca4JDBCMaven();
         String email = db.getEmail(getUserID());
         fixEmail.setText(email);
     }
@@ -373,7 +373,7 @@ public class UpdateInformation extends javax.swing.JPanel {
 
     public boolean updateInformation() throws SQLException {
         if (checkInfor()) {
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 dtb_query.updateCustomer(txtName.getText(), txtSpecifiedAddress.getText(), txtPhone.getText(),txtPass.getText(), fixEmail.getText(), txtCCCD.getText(), idWard,  dateFormated.format(jDateDoB.getDate()), getUserID());
@@ -389,7 +389,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     }
 
     private void updateProvince() {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector provinceData = dtb_query.getProvince();
             boxProvince.setModel(new DefaultComboBoxModel(provinceData));
@@ -399,7 +399,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     }
 
     private void updateDistrict(String province) {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector districtData = dtb_query.getDistrict(province);
             boxDistrict.setModel(new DefaultComboBoxModel(districtData));
@@ -409,7 +409,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     }
 
     private void updateWard(String district) {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector wardData = dtb_query.getWard(district);
             boxWard.setModel(new DefaultComboBoxModel(wardData));
@@ -432,7 +432,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     private void boxWardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxWardActionPerformed
         // TODO add your handling code here:
         String selectedWard = (String) boxWard.getSelectedItem();
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             idWard = dtb_query.getWardID(selectedWard);
         } catch (SQLException ex) {

@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -235,7 +235,7 @@ public class AuthenPanel extends javax.swing.JPanel {
             userCode = 0;
         }
         if ((getCodeReference() != 0) && (userCode == getCodeReference())) {
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 dtb_query.addCustomer(getName(), getSpecifiedAddress(), getPhone(), getPass(), getUserEmail(), getCccd(), Integer.parseInt(getIdWard()), getDobFormated());
                 showNoti("Sign up successful!");

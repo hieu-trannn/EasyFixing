@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -37,7 +37,7 @@ public class CustomerViewHistory extends javax.swing.JPanel {
     public void initTable() {
         setHeader();
 
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             int idCustomer = dtb_query.user2CustomerID(UserID);
 

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.DashboardAdmin;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -63,7 +63,7 @@ public class LoginPanel extends javax.swing.JPanel {
             labelWrongUser.setVisible(true);
             return false;
         } else {
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 Boolean id = dtb_query.checkEmailExistence(email);
                 if (!id) {

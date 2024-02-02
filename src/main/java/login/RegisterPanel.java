@@ -14,7 +14,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -63,7 +63,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             labelWarning.setVisible(true);
             return null;
         } else {
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 if (dtb_query.checkEmailExistence(email)) {
                     labelWarning.setText("Your email already existed, please login!");
@@ -92,7 +92,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     }
 
     private void updateProvince() {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector provinceData = dtb_query.getProvince();
             boxProvince.setModel(new DefaultComboBoxModel(provinceData));
@@ -102,7 +102,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     }
 
     private void updateDistrict(String province) {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector districtData = dtb_query.getDistrict(province);
             boxDistrict.setModel(new DefaultComboBoxModel(districtData));
@@ -112,7 +112,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     }
 
     private void updateWard(String district) {
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector wardData = dtb_query.getWard(district);
             boxWard.setModel(new DefaultComboBoxModel(wardData));
@@ -437,7 +437,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     private void boxWardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxWardActionPerformed
         // TODO add your handling code here:
         String selectedWard = (String) boxWard.getSelectedItem();
-        database dtb_query = new database();
+        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             idWard = dtb_query.getWardID(selectedWard);
         } catch (SQLException ex) {

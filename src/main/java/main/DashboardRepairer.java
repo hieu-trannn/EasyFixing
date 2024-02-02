@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import login.LoginPanel;
 import repairerCurrentOrder.CurrentOrderPanel;
 import repairerCustomerFeedback.WorkerFeedbackHistory;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 import ultis.EventMenuSelected;
 
 /**
@@ -102,7 +102,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         );
         panelAccMana.addEventChangePass((ActionEvent ae) -> {
             panelAuthen.setServiceType(1);
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -134,7 +134,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
                         int result = JOptionPane.showConfirmDialog(panelAccMana, "Are you really want to delete account?", "Warning!!", JOptionPane.YES_NO_OPTION);
                         if (result == JOptionPane.YES_OPTION) {
                             // delete account and come back log in frame
-                            database dtb = new database();
+                            Ca4JDBCMaven dtb = new Ca4JDBCMaven();
                             try {
                                 dtb.deleteAccount(getUserId());
                                 LoginMainFrame loginFr = new LoginMainFrame();
@@ -155,7 +155,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
 
         panelAccMana.addEventDeleteAccount((ActionEvent ae) -> {
             panelAuthen.setServiceType(2);
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -167,7 +167,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
 
         panelChangePass.addEventConfirm((ActionEvent ae) -> {
             if ((panelChangePass.getNewPassword().equals(panelChangePass.getRepeatNewPassword())) && (!"".equals(panelChangePass.getNewPassword()))) {
-                database dtb = new database();
+                Ca4JDBCMaven dtb = new Ca4JDBCMaven();
                 try {
                     // 
                     String newPassword = panelChangePass.getNewPassword();
@@ -184,7 +184,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         });
         panelAccMana.addEventUpdateInfo((ActionEvent ae) -> {
             panelAuthen.setServiceType(0);
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);

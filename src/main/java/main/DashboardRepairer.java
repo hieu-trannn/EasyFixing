@@ -4,6 +4,7 @@
  */
 package main;
 
+import OrderHis.HisOrderWor;
 import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
@@ -34,7 +35,8 @@ public class DashboardRepairer extends javax.swing.JFrame {
      * Creates new form DashboardAdmin
      */
     // Declare Panel here
-    private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private SamplePanel panel1, panel2, panel4, panel5;
+    private HisOrderWor panelHisOrderWor;
     private CurrentOrderPanel panelCurrentOrder;
     private AccountManagement panelAccMana;
     private UpdateInformation panelUpdInfo;
@@ -52,7 +54,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         panelCurrentOrder = new CurrentOrderPanel(getUserId());
         panel1 = new SamplePanel("1");
         panel2 = new SamplePanel("2");
-        panel3 = new SamplePanel("3");
+        panelHisOrderWor = new HisOrderWor(getUserId());
         panel4 = new SamplePanel("4");
         panel5 = new SamplePanel("5");
         panelAccMana = new AccountManagement(getUserId());
@@ -74,7 +76,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
                         setPanel(panelCurrentOrder);
                         break;
                     case 3:
-                        setPanel(panel3);
+                        setPanel(panelHisOrderWor);
                         break;
                     case 4:
                         setPanel(panelWorkerFbHis);

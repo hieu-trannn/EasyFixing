@@ -4,6 +4,7 @@
  */
 package main;
 
+import customerCurrentOrder.CurrentOrderPanel;
 import dashboard.SamplePanel;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -21,6 +22,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
      */
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private CurrentOrderPanel panelCurrentOrder;
     private int userId;
 
     public DashboardCustomer(int userId) {
@@ -29,6 +31,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
         setUserId(userId);
         setSize(1440, 900);
 
+        panelCurrentOrder = new CurrentOrderPanel(getUserId());
         panel1 = new SamplePanel("1");
         panel2 = new SamplePanel("2");
         panel3 = new SamplePanel("3");
@@ -47,7 +50,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
                         setPanel(panel1);
                         break;
                     case 2:
-                        setPanel(panel2);
+                        setPanel(panelCurrentOrder);
                         break;
                     case 3:
                         setPanel(panel3);

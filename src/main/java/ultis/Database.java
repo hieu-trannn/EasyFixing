@@ -251,15 +251,15 @@ public class Database {
                 row.add(resultSet.getInt("IDDonHang")); //3
                 data.add(row);
             }
-//            for (Vector innerVector : data) {
-//                for (int i = 0; i < innerVector.size(); i++) {
-//                    System.out.print(innerVector.get(i)); // Print element
-//                    if (i < innerVector.size() - 1) {
-//                        System.out.print(", "); // Print comma after each element except the last
-//                    }
-//                }
-//                System.out.println(); // Move to the next line after printing each inner vector
-//            }
+            for (Vector innerVector : data) {
+                for (int i = 0; i < innerVector.size(); i++) {
+                    System.out.print(innerVector.get(i)); // Print element
+                    if (i < innerVector.size() - 1) {
+                        System.out.print(", "); // Print comma after each element except the last
+                    }
+                }
+                System.out.println(); // Move to the next line after printing each inner vector
+            }
             return data;
         }
     }
@@ -558,6 +558,50 @@ public class Database {
             }
 
             return data;
+        }
+    }
+
+    public Vector getListOrderCustomer(int idCustomerUser) throws SQLException {
+        String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ? AND TrangThai <> 5";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        int idCustomer = user2CustomerID(idCustomerUser);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector<Vector>();
+            while (resultSet.next()) {
+                Vector row = new Vector();
+                int idWorker = resultSet.getInt("IDTho");
+                int idUser = worker2UserID(idWorker);
+                int idService = resultSet.getInt("IDDichVu");
+                row.add(getServiceName(idService)); //0
+                row.add(resultSet.getString("MoTaVanDe")); //1
+                row.add(getName(idUser));   //2
+                row.add(resultSet.getString("TongTien"));  //3
+                row.add(resultSet.getInt("TrangThai")); //4
+                row.add(resultSet.getInt("IDDonHang")); //5
+                data.add(row);
+            }
+//            for (Vector innerVector : data) {
+//                for (int i = 0; i < innerVector.size(); i++) {
+//                    System.out.print(innerVector.get(i)); // Print element
+//                    if (i < innerVector.size() - 1) {
+//                        System.out.print(", "); // Print comma after each element except the last
+//                    }
+//                }
+//                System.out.println(); // Move to the next line after printing each inner vector
+//            }
+            return data;
+        }
+    }
+
+    public void deleteOrder(int idOrder) throws SQLException {
+        String query = "DELETE FROM DonSuaChua WHERE IDDonHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idOrder);
+            preparedStatement.executeUpdate();
+            System.out.print("Delete Order!");
         }
     }
 }

@@ -4,6 +4,7 @@
  */
 package main;
 
+import OrderHis.HistoryOrderCus;
 import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
@@ -34,8 +35,9 @@ public class DashboardCustomer extends javax.swing.JFrame {
      * Creates new form DashboardAdmin
      */
     // Declare Panel here
-    private SamplePanel panel1, panel2, panel3, panel4, panel5;
+    private SamplePanel panel1, panel2, panel4, panel5;
     private int userId;
+    private HistoryOrderCus panelHistory;
     private AccountManagement panelAccMana;
     private UpdateInformation panelUpdInfo;
     private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
@@ -53,7 +55,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
 
         panel1 = new SamplePanel("1");
         panel2 = new SamplePanel("2");
-        panel3 = new SamplePanel("3");
+        panelHistory = new HistoryOrderCus(getUserId());
         panel4 = new SamplePanel("4");
         panel5 = new SamplePanel("5");
         panelAccMana = new AccountManagement(getUserId());
@@ -78,7 +80,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
                         setPanel(panel2);
                         break;
                     case 3:
-                        setPanel(panel3);
+                        setPanel(panelHistory);
                         break;
                     case 4:
                         setPanel(panelCusFbGUI);

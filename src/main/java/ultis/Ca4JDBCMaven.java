@@ -21,7 +21,7 @@ import java.util.Vector;
  */
 public class Ca4JDBCMaven {
 
-    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
+    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=easyfixing;user=sa;password=12345678";
 
     public void main(String[] args) throws ParseException {
         try (Connection con = DriverManager.getConnection(ConnectionUrl); Statement stmt = con.createStatement();) {
@@ -437,6 +437,55 @@ public class Ca4JDBCMaven {
                 System.out.println("Không tìm thấy " + idCustomer);
                 return 99;
             }
+        }
+    }
+    public Vector getWorOrderHistory(int idWorker) throws SQLException{
+        String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ? AND TrangThai = 5";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idWorker);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                Vector row = new Vector();
+                int idCus = resultSet.getInt("IDKhachHang");
+                int idService = resultSet.getInt("IDDichVu");
+                int userIdFromNguoiDung = user2CustomerID(idCus);
+                row.add(getName(userIdFromNguoiDung));   //0
+                row.add(getServiceName(idService)); //1
+//                System.out.println("UseridFromTho"+userIdFromTho);
+                row.add(resultSet.getString("MoTaVanDe"));  //2
+//                System.out.println(row.get(2));
+                row.add(resultSet.getInt("TongTien")); //3
+                row.add(resultSet.getDate("ThoiGianThanhToan"));
+                data.add(row);
+            }
+            return data;
+        } 
+        
+    }
+    public Vector getCustomerOrderHistory(int idCustomer) throws SQLException{
+        String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ? AND TrangThai = 5";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idCustomer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector<Vector> data = new Vector();
+            while (resultSet.next()) {
+                Vector row = new Vector();
+                int idWorker = resultSet.getInt("IDTho");
+                int idService = resultSet.getInt("IDDichVu");
+                int userIdFromTho = worker2UserID(idWorker);
+                row.add(getName(userIdFromTho));   //0
+                row.add(getServiceName(idService)); //1
+//                System.out.println("UseridFromTho"+userIdFromTho);
+                row.add(resultSet.getString("MoTaVanDe"));  //2
+//                System.out.println(row.get(2));
+                row.add(resultSet.getInt("TongTien")); //3
+                row.add(resultSet.getDate("ThoiGianThanhToan"));
+                data.add(row);
+            }
+            return data;
         }
     }
 

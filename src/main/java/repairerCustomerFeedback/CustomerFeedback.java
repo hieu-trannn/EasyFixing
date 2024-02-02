@@ -6,18 +6,22 @@ package repairerCustomerFeedback;
 
 //import repairerCurrentOrder.*;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 //import repairerCurrentOrder.TableActionCellEditor;
 //import repairerCurrentOrder.TableActionCellRender;
 //import repairerCurrentOrder.TableActionEvent;
-import ultis.Ca4JDBCMaven;
+import ultis.Database;
 
 /**
  *
@@ -34,7 +38,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
         setUserID(userid);
         initComponents();
         initTable();
-        
+
     }
 
     public void initTable() throws SQLException {
@@ -43,29 +47,19 @@ public class CustomerFeedback extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onAccept(int row) {
-                System.out.println("Pressed Accept");
-                int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
-                try {
-                    dtb_query.updateStateOrder(id, 2);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CustomerFeedback.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.removeRow(row);
+                showFeedbackDialog();
             }
         };
 
-        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+        Database dtb_query = new Database();
         int idCustomer = dtb_query.user2CustomerID(getUserID());
         try {
             Vector<Vector> data = dtb_query.getRemainFeedbackList(idCustomer);
-            
+
 //            System.out.println(data);
-            
             for (Vector rowData : data) {
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2),rowData.get(3), "temp"});
+                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), rowData.get(3), "temp"});
             }
 
         } catch (SQLException ex) {
@@ -116,7 +110,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,7 +171,47 @@ public class CustomerFeedback extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void showFeedbackDialog() {
+        JTextField textField = new JTextField();
+        JTextField textFieldPoint = new JTextField();
+        textFieldPoint.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals("In range 0-5")) {
+                    textField.setText("");
+                }
+            }
 
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText("In range 0-5");
+                }
+            }
+        });
+        Object[] messageArray = { "Customer Feedback", textFieldPoint,"Point", textField};
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                messageArray,
+                "Customer Feedback Service",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            if ("".equals(textField.getText()) || "".equals(textFieldPoint.getText())) {
+                JOptionPane.showMessageDialog(null, "Please fill up all information!");
+                showFeedbackDialog();
+            } else {
+                Database dtb = new Database();
+                // add later
+                System.out.println("Feedback success");
+            }
+        } else {
+            System.out.println("cancel feedback");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

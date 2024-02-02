@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import ultis.Ca4JDBCMaven;
+import ultis.Database;
 
 /**
  *
@@ -37,7 +37,7 @@ public class CustomerFinishFeedback extends javax.swing.JPanel {
     public void initTable() {
         setHeader();
 
-        Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+        Database dtb_query = new Database();
         try {
             int idCustomer = dtb_query.user2CustomerID(UserID);
 

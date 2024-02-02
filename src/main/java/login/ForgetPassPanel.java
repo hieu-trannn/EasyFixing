@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import ultis.Ca4JDBCMaven;
+import ultis.Database;
 
 /**
  *
@@ -279,7 +279,7 @@ public class ForgetPassPanel extends javax.swing.JPanel {
             }
         } else {
             String pass = txtPass.getText();
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 dtb_query.updatePassword(getUserEmail(), pass);
                 showNoti("Password updated successfully!");

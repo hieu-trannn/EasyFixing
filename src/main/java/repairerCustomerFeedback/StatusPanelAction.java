@@ -27,7 +27,9 @@ public class StatusPanelAction extends javax.swing.JPanel {
                 event.onAccept(row);
             }
         });
-        
+    }
+    public void addEventCusDoneFb(ActionListener event) {
+        btnAccept.addActionListener(event);
     }
 
     /**

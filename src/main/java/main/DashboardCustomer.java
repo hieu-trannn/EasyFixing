@@ -21,7 +21,8 @@ import login.LoginPanel;
 import repairerCustomerFeedback.CustomerFeedback;
 import repairerCustomerFeedback.CustomerFeedbackGUI;
 import repairerCustomerFeedback.CustomerViewHistory;
-import ultis.Ca4JDBCMaven;
+import repairerCustomerFeedback.StatusPanelAction;
+import ultis.Database;
 import ultis.EventMenuSelected;
 
 /**
@@ -43,6 +44,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
     private CustomerFeedbackGUI panelCusFbGUI;
     private CustomerFeedback panelCusFb;
     private CustomerViewHistory panelViewHistory;
+    private StatusPanelAction panelStatuAction;
 
 
     public DashboardCustomer(int userId) throws SQLException {
@@ -62,6 +64,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
         panelCusFbGUI = new CustomerFeedbackGUI(getUserId());
         panelCusFb = new CustomerFeedback(getUserId());
         panelViewHistory = new CustomerViewHistory(getUserId());
+        panelStatuAction = new StatusPanelAction();
 
         menu.initMoving(DashboardCustomer.this);
 
@@ -100,7 +103,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
         );
         panelAccMana.addEventChangePass((ActionEvent ae) -> {
             panelAuthen.setServiceType(1);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -132,7 +135,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
                         int result = JOptionPane.showConfirmDialog(panelAccMana, "Are you really want to delete account?", "Warning!!", JOptionPane.YES_NO_OPTION);
                         if (result == JOptionPane.YES_OPTION) {
                             // delete account and come back log in frame
-                            Ca4JDBCMaven dtb = new Ca4JDBCMaven();
+                            Database dtb = new Database();
                             try {
                                 dtb.deleteAccount(getUserId());
                                 LoginMainFrame loginFr = new LoginMainFrame();
@@ -154,7 +157,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
 
         panelAccMana.addEventDeleteAccount((ActionEvent ae) -> {
             panelAuthen.setServiceType(2);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -166,7 +169,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
 
         panelChangePass.addEventConfirm((ActionEvent ae) -> {
             if ((panelChangePass.getNewPassword().equals(panelChangePass.getRepeatNewPassword())) && (!"".equals(panelChangePass.getNewPassword()))) {
-                Ca4JDBCMaven dtb = new Ca4JDBCMaven();
+                Database dtb = new Database();
                 try {
                     // 
                     String newPassword = panelChangePass.getNewPassword();
@@ -183,7 +186,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
         });
         panelAccMana.addEventUpdateInfo((ActionEvent ae) -> {
             panelAuthen.setServiceType(0);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -208,6 +211,11 @@ public class DashboardCustomer extends javax.swing.JFrame {
         panelCusFbGUI.addEventViewHistory((ActionEvent ae) -> {
             setPanel(panelViewHistory);
         });
+        panelStatuAction.addEventCusDoneFb((ActionEvent ae) -> {
+//            setPanel(panelViewHistory);
+            System.out.println("Customer Dashboard ");
+        });
+//        panelCusFb.
         setPanel(panel1);
     }
 

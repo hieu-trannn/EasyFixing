@@ -8,6 +8,9 @@ import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
 import accountManagement.UpdateInformation;
+import adminUserManagement.AddWorker;
+import adminUserManagement.UpdateWorker;
+import adminUserManagement.UserManagement;
 import dashboard.SamplePanel;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -16,7 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import login.LoginPanel;
-import ultis.Ca4JDBCMaven;
+import ultis.Database;
 import ultis.EventMenuSelected;
 
 /**
@@ -35,6 +38,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private UpdateInformation panelUpdInfo;
     private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
     private ChangePassword panelChangePass;
+    private UserManagement panelUserMana;
+    private AddWorker panelAddWorker;
+    private UpdateWorker panelUpdateWorker;
 
     public DashboardAdmin(int userId) throws SQLException {
         initComponents();
@@ -50,6 +56,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panelAccMana = new AccountManagement(getUserId());
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
+        panelUserMana = new UserManagement();
+        panelAddWorker = new AddWorker();
+        panelUpdateWorker = new UpdateWorker(0);
 
         menu.initMoving(DashboardAdmin.this);
 
@@ -60,7 +69,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             ) {
                 switch (index) {
                     case 1:
-                        setPanel(panel1);
+                        setPanel(panelUserMana);
                         break;
                     case 2:
                         setPanel(panel2);
@@ -89,7 +98,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         panelAccMana.addEventChangePass((ActionEvent ae) -> {
             panelAuthen.setServiceType(1);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -106,7 +115,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(panelAccMana, "Please fill up your password");
                 panelAuthen.setLabelWrongPass("Fill up your password!", true);
             } else {
-                if (!userPass.isEmpty()&&userPass.equals(panelAuthen.getReferencePass())) {
+                if (!userPass.isEmpty() && userPass.equals(panelAuthen.getReferencePass())) {
                     // set label if wrong password
                     panelAuthen.setLabelWrongPass("", false);
                     // change panel
@@ -121,7 +130,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                         int result = JOptionPane.showConfirmDialog(panelAccMana, "Are you really want to delete account?", "Warning!!", JOptionPane.YES_NO_OPTION);
                         if (result == JOptionPane.YES_OPTION) {
                             // delete account and come back log in frame
-                            Ca4JDBCMaven dtb = new Ca4JDBCMaven();
+                            Database dtb = new Database();
                             try {
                                 dtb.deleteAccount(getUserId());
                                 LoginMainFrame loginFr = new LoginMainFrame();
@@ -142,7 +151,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         panelAccMana.addEventDeleteAccount((ActionEvent ae) -> {
             panelAuthen.setServiceType(2);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -154,7 +163,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         panelChangePass.addEventConfirm((ActionEvent ae) -> {
             if ((panelChangePass.getNewPassword().equals(panelChangePass.getRepeatNewPassword())) && (!"".equals(panelChangePass.getNewPassword()))) {
-                Ca4JDBCMaven dtb = new Ca4JDBCMaven();
+                Database dtb = new Database();
                 try {
                     // 
                     String newPassword = panelChangePass.getNewPassword();
@@ -171,7 +180,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         panelAccMana.addEventUpdateInfo((ActionEvent ae) -> {
             panelAuthen.setServiceType(0);
-            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -189,6 +198,53 @@ public class DashboardAdmin extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
+        });
+        panelUserMana.addEventAddUser((ActionEvent ae) -> {
+            setPanel(panelAddWorker);
+        });
+        panelAddWorker.addEventAddConfirm((ActionEvent ae) -> {
+            try {
+                if (panelAddWorker.updateInformation()) {
+                    setPanel(panelUserMana);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        panelUserMana.addEventDeleteUser((ActionEvent ae) -> {
+            String message = "Please input Account ID you want to delete";
+            String inputId = panelUserMana.showDeleteDialog(message);
+            if (!inputId.isEmpty()) {
+                Database dtb = new Database();
+                try {
+                    dtb.deleteAccount(Integer.parseInt(inputId));
+                    JOptionPane.showMessageDialog(panelUserMana, "Successfully delete User");
+                } catch (SQLException ex) {
+                    Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("you cancel delete");
+            }
+
+        });
+        panelUserMana.addEventUpdateUser((ActionEvent ae) -> {
+            String message = "Please input Worker ID you want to update";
+            String inputId = panelUserMana.showGetWorkerIDDialog(message);
+            panelUpdateWorker.setUserID(Integer.parseInt(inputId));
+            setPanel(panelUpdateWorker);
+
+        });
+        panelUpdateWorker.addEventUpdateConfirm((ActionEvent ae) -> {
+
+            try {
+                if (panelUpdateWorker.updateInformation()) {
+                    setPanel(panelAccMana);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
         setPanel(panel1);
     }

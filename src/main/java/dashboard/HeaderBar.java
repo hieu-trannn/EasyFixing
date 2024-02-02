@@ -49,27 +49,13 @@ public class HeaderBar extends javax.swing.JPanel {
 
         labelSearchIcon = new javax.swing.JLabel();
         hintSearchText1 = new swing.HintSearchText();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        labelSearchIcon.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/search.png")); // NOI18N
 
         hintSearchText1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         hintSearchText1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hintSearchText1ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/notification.png")); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -82,13 +68,11 @@ public class HeaderBar extends javax.swing.JPanel {
                 .addComponent(labelSearchIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hintSearchText1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelSearchIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(hintSearchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -96,10 +80,6 @@ public class HeaderBar extends javax.swing.JPanel {
     private void hintSearchText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintSearchText1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hintSearchText1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -114,7 +94,6 @@ public class HeaderBar extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.HintSearchText hintSearchText1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelSearchIcon;
     // End of variables declaration//GEN-END:variables
 }

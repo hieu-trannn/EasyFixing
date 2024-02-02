@@ -5,6 +5,7 @@ C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\dashboard\Mod
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\dashboard\SamplePanel.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\login\AuthenPanel.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\StatusPanelAction.java
+C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\adminUserManagement\UserManagement.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\CustomerFeedback.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\login\RegisterPanel.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\PanelBorder.java
@@ -17,7 +18,7 @@ C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\ultis\EventMe
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\TableActionEvent.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\dashboard\MenuRepairer.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\main\DashboardAdmin.java
-C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\ultis\database.java
+C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\ultis\Database.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\HieuScrollPane.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\WorkerFeedbackHistory.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\ListMenu.java
@@ -29,6 +30,8 @@ C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\main\LoginMai
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\TableActionCellEditor.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\MenuItemPanel.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\CustomerFeedbackGUI.java
+C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\adminUserManagement\AddWorker.java
+C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\adminUserManagement\UpdateWorker.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\dashboard\HeaderBar.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCurrentOrder\TableActionEvent.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\PanelSlide.java
@@ -41,4 +44,5 @@ C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\accountManage
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\main\DashboardCustomer.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\CustomerViewHistory.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\swing\NPLinkButton.java
+C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\repairerCustomerFeedback\CustomerFinishFeedback.java
 C:\Users\hieut\Documents\NetBeansProjects\EasyFixing\src\main\java\accountManagement\UpdateInformation.java

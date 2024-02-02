@@ -64,7 +64,7 @@
     </Component>
     <Component class="swing.NPLinkButton" name="btnRefuse">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Refuse"/>
+        <Property name="text" type="java.lang.String" value="Reject"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="16" style="0"/>
         </Property>

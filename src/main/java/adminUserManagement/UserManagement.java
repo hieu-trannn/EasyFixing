@@ -6,8 +6,10 @@ package adminUserManagement;
 
 import accountManagement.*;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import ultis.Database;
 
 /**
  *
@@ -26,10 +28,11 @@ public class UserManagement extends javax.swing.JPanel {
     public void addEventDeleteUser(ActionListener event) {
         btnDel.addActionListener(event);
     }
-    
+
     public void addEventAddUser(ActionListener event) {
         btnAdd.addActionListener(event);
     }
+
     public void addEventUpdateUser(ActionListener event) {
         btnUpdate.addActionListener(event);
     }
@@ -132,7 +135,8 @@ public class UserManagement extends javax.swing.JPanel {
             return "";  // User canceled the input
         }
     }
-    public String showGetWorkerIDDialog(String message) {
+
+    public String showGetWorkerIDDialog(String message) throws SQLException {
         JTextField textField = new JTextField();
         Object[] messageArray = {message, textField};
 
@@ -145,14 +149,19 @@ public class UserManagement extends javax.swing.JPanel {
         );
 
         if (option == JOptionPane.OK_OPTION) {
-            return textField.getText();
+            Database dtb = new Database();
+            if (dtb.isWorkerExist(Integer.parseInt((textField.getText())))) {
+                return textField.getText();
+            } else {
+                return "";
+            }
         } else {
             return "";  // User canceled the input
         }
     }
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -166,11 +175,9 @@ public class UserManagement extends javax.swing.JPanel {
 //    public int getUserID() {
 //        return this.UserID;
 //    }
-
 //    public void setUserID(int userid) {
 //        this.UserID = userid;
 //    }
-
 //    private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnAdd;

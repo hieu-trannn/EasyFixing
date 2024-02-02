@@ -230,9 +230,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         panelUserMana.addEventUpdateUser((ActionEvent ae) -> {
             String message = "Please input Worker ID you want to update";
-            String inputId = panelUserMana.showGetWorkerIDDialog(message);
-            panelUpdateWorker.setUserID(Integer.parseInt(inputId));
-            setPanel(panelUpdateWorker);
+            String inputId;
+            try {
+                inputId = panelUserMana.showGetWorkerIDDialog(message);
+                if ("".equals(inputId))
+                {
+                    JOptionPane.showMessageDialog(panelUserMana, "Worker Id is not valid");
+                }
+                else{
+                panelUpdateWorker.setUserID(Integer.parseInt(inputId));
+                setPanel(panelUpdateWorker);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
 
         });
         panelUpdateWorker.addEventUpdateConfirm((ActionEvent ae) -> {

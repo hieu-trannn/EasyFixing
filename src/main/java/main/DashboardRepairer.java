@@ -14,13 +14,15 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import login.LoginPanel;
-import repairerCurrentOrder.CurrentOrderPanel;
 import repairerCustomerFeedback.WorkerFeedbackHistory;
+import repairerCurrentOrder.CurrentOrderPanel;
+import repairerCurrentOrder.ShowOrderPanel;
 import ultis.Database;
 import ultis.EventMenuSelected;
 
@@ -36,6 +38,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
     private CurrentOrderPanel panelCurrentOrder;
+    private ShowOrderPanel panelShowOrder;
     private AccountManagement panelAccMana;
     private UpdateInformation panelUpdInfo;
     private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
@@ -49,7 +52,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setSize(1440, 900);
 
-        panelCurrentOrder = new CurrentOrderPanel(getUserId());
+        
         panel1 = new SamplePanel("1");
         panel2 = new SamplePanel("2");
         panel3 = new SamplePanel("3");
@@ -59,6 +62,9 @@ public class DashboardRepairer extends javax.swing.JFrame {
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
         panelWorkerFbHis = new WorkerFeedbackHistory(getUserId());
+        panelCurrentOrder = new CurrentOrderPanel(getUserId());
+        panelShowOrder = new ShowOrderPanel();
+        
         menu.initMoving(DashboardRepairer.this);
 
         menu.addEventMenuSelected(
@@ -202,6 +208,23 @@ public class DashboardRepairer extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
+        });
+        panelCurrentOrder.addEventShowOrder((ActionEvent ae) -> {
+            int idOrder = panelCurrentOrder.getIdOrder();
+//            System.out.println("Show Order with idOrder = " + idOrder);
+            Database dtb_query = new Database();
+            try {
+                Vector data = dtb_query.getOrderData(idOrder);
+                panelShowOrder.UpdateShowOrderPanel(data, idOrder);
+                setPanel(panelShowOrder);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DashboardRepairer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        panelShowOrder.addEventBack((ActionEvent ae) -> {
+            setPanel(panelCurrentOrder);
         });
         setPanel(panelCurrentOrder);
     }

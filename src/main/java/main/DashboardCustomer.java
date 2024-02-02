@@ -4,6 +4,7 @@
  */
 package main;
 
+import customerCurrentOrder.CurrentOrderPanel;
 import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
@@ -31,9 +32,7 @@ import ultis.EventMenuSelected;
  */
 public class DashboardCustomer extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashboardAdmin
-     */
+
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
     private int userId;
@@ -45,7 +44,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
     private CustomerFeedback panelCusFb;
     private CustomerViewHistory panelViewHistory;
     private StatusPanelAction panelStatuAction;
-
+    private CurrentOrderPanel panelCurrentOrder;
 
     public DashboardCustomer(int userId) throws SQLException {
         initComponents();
@@ -65,7 +64,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
         panelCusFb = new CustomerFeedback(getUserId());
         panelViewHistory = new CustomerViewHistory(getUserId());
         panelStatuAction = new StatusPanelAction();
-
+        panelCurrentOrder = new CurrentOrderPanel(getUserId());
         menu.initMoving(DashboardCustomer.this);
 
         menu.addEventMenuSelected(
@@ -78,7 +77,7 @@ public class DashboardCustomer extends javax.swing.JFrame {
                         setPanel(panel1);
                         break;
                     case 2:
-                        setPanel(panel2);
+                        setPanel(panelCurrentOrder);
                         break;
                     case 3:
                         setPanel(panel3);

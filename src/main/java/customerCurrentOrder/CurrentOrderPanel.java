@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package repairerCurrentOrder;
+package customerCurrentOrder;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -41,43 +42,88 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
         TableActionEvent event = new TableActionEvent() {
             @Override
-            public void onAccept(int row) {
-//                System.out.println("Pressed Accept");
-                int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                Database dtb_query = new Database();
-                try {
-                    dtb_query.updateStateOrder(id, 2);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+            public void onUpdate(int row) {
+                if ((tableOrder.getValueAt(tableOrder.getSelectedRow(), 4) != "Haven't received") && (tableOrder.getValueAt(tableOrder.getSelectedRow(), 4) != "Rejected")) {
+                    warning("Your order has been accepted! Cannot modify or delete the order.", "Cannot modify/delete order");
+                } else {
+                    if (tableOrder.isEditing()) {
+                        tableOrder.getCellEditor().stopCellEditing();
+                    }
+                    System.out.println("Pressed Update Order");
                 }
-                DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.removeRow(row);
             }
 
             @Override
-            public void onRefuse(int row) {
-//                System.out.println("Pressed Refuse");
-                if (tableOrder.isEditing()) {
-                    tableOrder.getCellEditor().stopCellEditing();
+            public void onDelete(int row) {
+                if ((tableOrder.getValueAt(tableOrder.getSelectedRow(), 4) != "Haven't received") && (tableOrder.getValueAt(tableOrder.getSelectedRow(), 4) != "Rejected")) {
+                    warning("Your order has been accepted! Cannot modify or delete the order.", "Cannot modify/delete order");
+                } else {
+                    if (tableOrder.isEditing()) {
+                        tableOrder.getCellEditor().stopCellEditing();
+                    }
+                    int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 6);
+                    Database dtb_query = new Database();
+                    try {
+                        dtb_query.deleteOrder(id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
+                    model.removeRow(row);
                 }
-                int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                Database dtb_query = new Database();
-                try {
-                    dtb_query.updateStateOrder(id, 1);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            @Override
+            public void onPay(int row) {
+                if (tableOrder.getValueAt(tableOrder.getSelectedRow(), 4) != "Haven't paid") {
+                    warning("Your order has not in right state to be pay!", "Cannot pay order");
+                } else {
+                    if (tableOrder.isEditing()) {
+                        tableOrder.getCellEditor().stopCellEditing();
+                    }
+                    int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 6);
+                    Database dtb_query = new Database();
+                    try {
+                        dtb_query.updateStateOrder(id, 4);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CurrentOrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println("Paid The Order!");
+                    DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
+                    model.removeRow(row);
                 }
-                DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.removeRow(row);
             }
         };
 
         Database dtb_query = new Database();
         try {
-            Vector<Vector> data = dtb_query.getListOrder(getUserID());
+            Vector<Vector> data = dtb_query.getListOrderCustomer(getUserID());
             for (Vector rowData : data) {
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
-                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), "Placeholder", (int) rowData.get(3)});
+                String status;
+                switch ((int) rowData.get(4)) {
+                    case 0:
+                        status = "Haven't received";
+                        break;
+                    case 1:
+                        status = "Rejected";
+                        break;
+                    case 2:
+                        status = "Accepted";
+                        break;
+                    case 3:
+                        status = "Haven't paid";
+                        break;
+                    case 4:
+                        status = "Repairing";
+                        break;
+                    case 5:
+                        status = "Done";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+                model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), rowData.get(3), status, "Placeholder", (int) rowData.get(5)});
             }
 
         } catch (SQLException ex) {
@@ -89,8 +135,18 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         tableOrder.getColumn("ID").setPreferredWidth(0);
         tableOrder.getColumn("ID").setWidth(0);
 
-        tableOrder.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-        tableOrder.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        tableOrder.getColumn("Price").setMaxWidth(100);
+        tableOrder.getColumn("Price").setMinWidth(100);
+        tableOrder.getColumn("Price").setPreferredWidth(100);
+        tableOrder.getColumn("Price").setWidth(100);
+
+        tableOrder.getColumn("Status").setMaxWidth(120);
+        tableOrder.getColumn("Status").setMinWidth(120);
+        tableOrder.getColumn("Status").setPreferredWidth(120);
+        tableOrder.getColumn("Status").setWidth(120);
+
+        tableOrder.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        tableOrder.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
 
         tableOrder.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -99,13 +155,17 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 //                    int selectedRow = tableOrder.getSelectedRow();
                     int selectedColumn = tableOrder.getSelectedColumn();
 
-                    if (selectedColumn != 3) {
-                        setIdOrder((int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4));
+                    if (selectedColumn != 5) {
+                        setIdOrder((int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 6));
                         btnHiden.doClick();
                     }
                 }
             }
         });
+    }
+
+    private void warning(String msg, String title) {
+        JOptionPane.showMessageDialog(this, msg, title, JOptionPane.WARNING_MESSAGE);
     }
 
     public void setHeader() {
@@ -151,11 +211,11 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Service", "Price", "Status", "ID"
+                "Service", "Description", "Worker", "Price", "Status", "Action", "ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -170,9 +230,14 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         tableOrder.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableOrder);
         if (tableOrder.getColumnModel().getColumnCount() > 0) {
+            tableOrder.getColumnModel().getColumn(0).setResizable(false);
+            tableOrder.getColumnModel().getColumn(1).setResizable(false);
+            tableOrder.getColumnModel().getColumn(2).setResizable(false);
             tableOrder.getColumnModel().getColumn(3).setResizable(false);
+            tableOrder.getColumnModel().getColumn(3).setPreferredWidth(0);
             tableOrder.getColumnModel().getColumn(4).setResizable(false);
-            tableOrder.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tableOrder.getColumnModel().getColumn(5).setResizable(false);
+            tableOrder.getColumnModel().getColumn(6).setResizable(false);
         }
 
         panelBorder1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);

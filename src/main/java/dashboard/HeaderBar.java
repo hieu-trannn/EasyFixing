@@ -4,9 +4,17 @@
  */
 package dashboard;
 
+import Notification.popup.DefaultLayoutCallBack;
+import Notification.popup.DefaultOption;
+import Notification.popup.GlassPanePopup;
+import Notifications.NotificationUser;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import net.miginfocom.layout.ComponentWrapper;
+import net.miginfocom.layout.LayoutCallback;
 
 /**
  *
@@ -49,11 +57,9 @@ public class HeaderBar extends javax.swing.JPanel {
 
         labelSearchIcon = new javax.swing.JLabel();
         hintSearchText1 = new swing.HintSearchText();
-        jButton1 = new javax.swing.JButton();
+        cmd = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        labelSearchIcon.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/search.png")); // NOI18N
 
         hintSearchText1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         hintSearchText1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,14 +68,14 @@ public class HeaderBar extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/delini/NetBeansProjects/OOAD_maven/src/main/java/icon/notification.png")); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/notification.png"))); // NOI18N
+        cmd.setBorder(null);
+        cmd.setBorderPainted(false);
+        cmd.setContentAreaFilled(false);
+        cmd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmdActionPerformed(evt);
             }
         });
 
@@ -83,12 +89,12 @@ public class HeaderBar extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hintSearchText1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelSearchIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(cmd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(hintSearchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -97,9 +103,38 @@ public class HeaderBar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_hintSearchText1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        GlassPanePopup.showPopup(new NotificationUser(1), new DefaultOption(){
+            @Override
+            public float opacity(){
+                return 0;
+            }
+
+            @Override
+            public LayoutCallback getLayoutCallback(Component parent) {
+                return new DefaultLayoutCallBack(parent){
+                    @Override
+                    public void correctBounds(ComponentWrapper cw){
+                        if (getParent().isVisible()){
+                            Point pl = parent.getLocationOnScreen();
+                            Point bl = cmd.getLocationOnScreen();
+                            int x = bl.x - pl.x;
+                            int y = bl.y - pl.y;
+                            y += (1f- getAnimate()) * 10f;
+                            cw.setBounds(x- cw.getWidth() + cmd.getWidth(), y + cmd.getHeight(), cw.getWidth(), cw.getHeight());
+                        }
+                        else{
+                            super.correctBounds(cw);
+                        }
+                       
+                    }
+                };
+            }
+            
+            
+        });
+    }//GEN-LAST:event_cmdActionPerformed
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -113,8 +148,8 @@ public class HeaderBar extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmd;
     private swing.HintSearchText hintSearchText1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelSearchIcon;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Notification.popup;
+package Notifications;
+import Notifications.DefaultOption;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Container;

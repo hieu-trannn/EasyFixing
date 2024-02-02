@@ -54,7 +54,6 @@ login\LoginPanel$4.class
 repairerCurrentOrder\CurrentOrderPanel.class
 repairerCurrentOrder\TableActionCellEditor.class
 login\RegisterPanel$6.class
-ultis\database.class
 accountManagement\ChangePassword$2.class
 accountManagement\UpdateInformation$2.class
 main\DashboardAdmin$1.class

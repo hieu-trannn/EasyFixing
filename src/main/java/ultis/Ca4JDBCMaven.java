@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+
 /**
  *
  * @author Admin
@@ -463,6 +464,22 @@ public class Ca4JDBCMaven {
             return data;
         } 
         
+    }
+        public Vector getListNoti(int idUser) throws SQLException {
+        String query = "SELECT * FROM ThongBao WHERE IDNguoiDung = ? ";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                    preparedStatement.setInt(1, idUser);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                Vector<Vector> data = new Vector();
+                while (resultSet.next()) {
+                     Vector row = new Vector();
+                     row.add(resultSet.getTime("ThoiGianThongBao"));
+                     row.add(resultSet.getString("NoiDungThongBao"));
+                     data.add(row);
+            }
+            return data;
+        }
     }
     public Vector getCustomerOrderHistory(int idCustomer) throws SQLException{
         String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ? AND TrangThai = 5";

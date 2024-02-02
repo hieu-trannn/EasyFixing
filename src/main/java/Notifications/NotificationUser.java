@@ -22,7 +22,7 @@ import javax.swing.plaf.ScrollBarUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
-import ultis.database;
+import ultis.Ca4JDBCMaven;
 
 /**
  *
@@ -47,7 +47,7 @@ public class NotificationUser extends javax.swing.JPanel {
         loadNoti(userid);
     }
         private void loadNoti(int userid){
-            database dtb_query = new database();
+            Ca4JDBCMaven dtb_query = new Ca4JDBCMaven();
         try {
             Vector<Vector> data = dtb_query.getListNoti(userid);
             for (Vector rowData : data) {

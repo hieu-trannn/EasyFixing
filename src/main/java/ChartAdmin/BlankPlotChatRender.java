@@ -1,5 +1,6 @@
-package BlankChart;
+package ChartAdmin;
 
+import ChartAdmin.BlankPlotChart;
 import java.awt.Graphics2D;
 
 public abstract class BlankPlotChatRender {

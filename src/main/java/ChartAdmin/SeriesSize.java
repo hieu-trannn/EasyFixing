@@ -1,4 +1,4 @@
-package BlankChart;
+package ChartAdmin;
 
 public class SeriesSize {
 

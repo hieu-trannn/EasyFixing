@@ -4,9 +4,6 @@
  */
 package ChartAdmin;
 
-import BlankChart.BlankPlotChart;
-import BlankChart.BlankPlotChatRender;
-import BlankChart.SeriesSize;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -72,7 +69,7 @@ public class Chart extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        blankPlotChart1 = new BlankChart.BlankPlotChart();
+        blankPlotChart1 = new ChartAdmin.BlankPlotChart();
         panelLegend = new javax.swing.JPanel();
 
         jLabel1.setText("jLabel1");
@@ -101,7 +98,7 @@ public class Chart extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private BlankChart.BlankPlotChart blankPlotChart1;
+    private ChartAdmin.BlankPlotChart blankPlotChart1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelLegend;
     // End of variables declaration//GEN-END:variables

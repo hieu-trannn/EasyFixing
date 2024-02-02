@@ -42,7 +42,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="BlankChart.BlankPlotChart" name="blankPlotChart1">
+    <Container class="ChartAdmin.BlankPlotChart" name="blankPlotChart1">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>

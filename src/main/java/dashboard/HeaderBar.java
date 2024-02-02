@@ -4,9 +4,9 @@
  */
 package dashboard;
 
-import Notification.popup.DefaultLayoutCallBack;
-import Notification.popup.DefaultOption;
-import Notification.popup.GlassPanePopup;
+import Notifications.DefaultLayoutCallBack;
+import Notifications.DefaultOption;
+import Notifications.GlassPanePopup;
 import Notifications.NotificationUser;
 import java.awt.Component;
 import java.awt.Graphics;

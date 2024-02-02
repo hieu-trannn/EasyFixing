@@ -71,6 +71,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 2: {
                     buttonPressed(viewBtn, type);
@@ -79,6 +80,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 3: {
                     buttonPressed(viewBtn, type);
@@ -87,6 +89,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 1: {
                     buttonPressed(deleteBtn, type);
@@ -95,6 +98,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 case 4: {
                     buttonPressed(fbBtn, type);
@@ -103,6 +107,7 @@ public class HieuScrollPane extends JScrollPane {
                     temp.setPreferredSize(dimension);
                     ((GridLayout) temp.getLayout()).setHgap(50);
                     allPanel.add(temp);
+                    break;
                 }
                 // in case: type is not processed
                 default: {
@@ -135,27 +140,31 @@ public class HieuScrollPane extends JScrollPane {
 //                    LoginFrame.pack(); //cause Window be sized to fix layout size
 //                    LoginFrame.setLocationRelativeTo(null);
                 });
+                break;
             case 1:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("update service information and inform user");
                     // code to handle here
                 });
-
+                break;
             case 2:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to bill's detailed information GUI");
                     // code to change interface here
                 });
+                break;
             case 3:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to history's detailed information GUI");
                     // code to change interface here
                 });
+                break;
             case 4:
                 pressedBtn.addActionListener((ActionEvent ae) -> {
                     System.out.println("Change interface to feeback GUI");
                     // code to change interface here
                 });
+                break;
             default: {
             }
         }

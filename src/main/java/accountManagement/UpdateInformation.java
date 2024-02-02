@@ -4,38 +4,27 @@
  */
 package accountManagement;
 
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import login.AuthenPanel;
 import login.LoginPanel;
-import ultis.database;
+import ultis.Database;
 
 /**
  *
  * @author hieut
  */
 public class UpdateInformation extends javax.swing.JPanel {
-
     private int idWard;
-
     /**
      * Creates new form UpdateInformation
      */
-    public UpdateInformation(int userid) throws SQLException {
+    public UpdateInformation(int userid) {
         initComponents();
         UserID = userid;
-        updateProvince();
-        labelWarning.setVisible(false);
-        database db = new database();
-        String email = db.getEmail(getUserID());
-        fixEmail.setText(email);
     }
 
     /**
@@ -52,7 +41,8 @@ public class UpdateInformation extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtName = new swing.NPLinkTextField();
-        btnUpdate = new swing.NPLinkButton();
+        btnSignUp = new swing.NPLinkButton();
+        btnBackLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtCCCD = new swing.NPLinkTextField();
         jDateDoB = new com.toedter.calendar.JDateChooser();
@@ -71,7 +61,7 @@ public class UpdateInformation extends javax.swing.JPanel {
         txtPass = new swing.NPLinkTextField();
         jLabel12 = new javax.swing.JLabel();
         labelWarning = new javax.swing.JLabel();
-        fixEmail = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1115, 841));
@@ -97,18 +87,24 @@ public class UpdateInformation extends javax.swing.JPanel {
             }
         });
 
-        btnUpdate.setText("Update");
-        btnUpdate.setBorderColor(new java.awt.Color(247, 205, 139));
-        btnUpdate.setColor(new java.awt.Color(250, 229, 199));
-        btnUpdate.setColorClick(new java.awt.Color(250, 229, 199));
-        btnUpdate.setColorOver(new java.awt.Color(247, 205, 139));
-        btnUpdate.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        btnUpdate.setRadius(37);
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnSignUp.setText("Sign up");
+        btnSignUp.setBorderColor(new java.awt.Color(247, 205, 139));
+        btnSignUp.setColor(new java.awt.Color(250, 229, 199));
+        btnSignUp.setColorClick(new java.awt.Color(250, 229, 199));
+        btnSignUp.setColorOver(new java.awt.Color(247, 205, 139));
+        btnSignUp.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        btnSignUp.setRadius(37);
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnSignUpActionPerformed(evt);
             }
         });
+
+        btnBackLogin.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        btnBackLogin.setForeground(new java.awt.Color(232, 158, 39));
+        btnBackLogin.setText("Back to Login");
+        btnBackLogin.setContentAreaFilled(false);
+        btnBackLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel5.setText("Citizen number");
@@ -202,10 +198,8 @@ public class UpdateInformation extends javax.swing.JPanel {
         labelWarning.setForeground(new java.awt.Color(255, 0, 51));
         labelWarning.setText("Please provide all nedded information!");
 
-        fixEmail.setBackground(new java.awt.Color(204, 204, 204));
-        fixEmail.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        fixEmail.setForeground(new java.awt.Color(255, 51, 51));
-        fixEmail.setText("<user fixed email>");
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel13.setText("<user fixed email>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,7 +209,8 @@ public class UpdateInformation extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBackLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -233,7 +228,7 @@ public class UpdateInformation extends javax.swing.JPanel {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(fixEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -261,7 +256,7 @@ public class UpdateInformation extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -288,7 +283,7 @@ public class UpdateInformation extends javax.swing.JPanel {
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(fixEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -309,8 +304,10 @@ public class UpdateInformation extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelWarning)
                 .addGap(20, 20, 20)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBackLogin)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -318,9 +315,9 @@ public class UpdateInformation extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
+                .addContainerGap(209, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,9 +332,9 @@ public class UpdateInformation extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
 
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void txtCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCCCDActionPerformed
         // TODO add your handling code here:
@@ -346,12 +343,8 @@ public class UpdateInformation extends javax.swing.JPanel {
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPhoneActionPerformed
-    public void addEventUpdateConfirm(ActionListener event) {
-        btnUpdate.addActionListener(event);
-    }
-
-    public boolean checkInfor() throws SQLException {
-        String name, cccd, phone, pass, specifiedAddress;
+    public Vector<String> checkInfor() {
+        String name, cccd, phone, email, pass, specifiedAddress;
         Date dob;
 
         name = txtName.getText();
@@ -365,31 +358,27 @@ public class UpdateInformation extends javax.swing.JPanel {
         if (name.isEmpty() || cccd.isEmpty() || phone.isEmpty() || (dob == null) || pass.isEmpty() || specifiedAddress.isEmpty() || (boxWard.getSelectedIndex() == -1)) {
             labelWarning.setText("Please provide all needed information correctly!");
             labelWarning.setVisible(true);
-            return false;
+            return null;
         } else {
-            return true;
-        }
-    }
-
-    public boolean updateInformation() throws SQLException {
-        if (checkInfor()) {
-            database dtb_query = new database();
+            Database dtb_query = new Database();
+            labelWarning.setVisible(false);
             SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                dtb_query.updateCustomer(txtName.getText(), txtSpecifiedAddress.getText(), txtPhone.getText(),txtPass.getText(), fixEmail.getText(), txtCCCD.getText(), idWard,  dateFormated.format(jDateDoB.getDate()), getUserID());
-                JOptionPane.showMessageDialog(this, "Update information successfully");
-                return true;
-            } catch (SQLException | ParseException ex) {
-                Logger.getLogger(AuthenPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            return false;
+            String dobFormated = dateFormated.format(dob);
+            Vector<String> data = new Vector();
+            data.add(name);
+            data.add(specifiedAddress);
+            data.add(phone);
+            data.add(pass);
+            //                    data.add(email);
+            data.add(cccd);
+            data.add(idWard + "");
+            data.add(dobFormated);
+            return data;
         }
-        return false;
     }
 
     private void updateProvince() {
-        database dtb_query = new database();
+        Database dtb_query = new Database();
         try {
             Vector provinceData = dtb_query.getProvince();
             boxProvince.setModel(new DefaultComboBoxModel(provinceData));
@@ -399,7 +388,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     }
 
     private void updateDistrict(String province) {
-        database dtb_query = new database();
+        Database dtb_query = new Database();
         try {
             Vector districtData = dtb_query.getDistrict(province);
             boxDistrict.setModel(new DefaultComboBoxModel(districtData));
@@ -409,7 +398,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     }
 
     private void updateWard(String district) {
-        database dtb_query = new database();
+        Database dtb_query = new Database();
         try {
             Vector wardData = dtb_query.getWard(district);
             boxWard.setModel(new DefaultComboBoxModel(wardData));
@@ -432,7 +421,7 @@ public class UpdateInformation extends javax.swing.JPanel {
     private void boxWardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxWardActionPerformed
         // TODO add your handling code here:
         String selectedWard = (String) boxWard.getSelectedItem();
-        database dtb_query = new database();
+        Database dtb_query = new Database();
         try {
             idWard = dtb_query.getWardID(selectedWard);
         } catch (SQLException ex) {
@@ -448,26 +437,28 @@ public class UpdateInformation extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-    public int getUserID() {
+    public int getUserID()
+    {
         return this.UserID;
     }
-
-    public void setUserID(int userid) {
+    public void setUserID(int userid)
+    {
         this.UserID = userid;
     }
-
+    
     private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxDistrict;
     private javax.swing.JComboBox boxProvince;
     private javax.swing.JComboBox<String> boxWard;
-    private swing.NPLinkButton btnUpdate;
-    private javax.swing.JLabel fixEmail;
+    private javax.swing.JButton btnBackLogin;
+    private swing.NPLinkButton btnSignUp;
     private com.toedter.calendar.JDateChooser jDateDoB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ultis.database;
+import ultis.Database;
 import ultis.JavaEmailSender;
 
 /**
@@ -67,7 +67,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
             if (pass.isEmpty() || email.isEmpty()) {
                 login.setLabelWrongUser("Please provide all needed information!", true);
             } else {
-                database dtb_query = new database();
+                Database dtb_query = new Database();
                 try {
                     int id = dtb_query.loginUser(email, pass);
                     if (id == -1) {
@@ -191,9 +191,9 @@ public class LoginMainFrame extends javax.swing.JFrame {
         panelGradient2Layout.setHorizontalGroup(
             panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradient2Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(353, 353, 353))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         panelGradient2Layout.setVerticalGroup(
             panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

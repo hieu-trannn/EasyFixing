@@ -7,16 +7,14 @@ package main;
 import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
-import accountManagement.UpdateInformation;
 import dashboard.SamplePanel;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import login.LoginPanel;
-import ultis.database;
+import ultis.Database;
 import ultis.EventMenuSelected;
 
 /**
@@ -32,11 +30,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private int userId;
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
     private AccountManagement panelAccMana;
-    private UpdateInformation panelUpdInfo;
-    private AuthenticatePassword panelAuthen = new AuthenticatePassword(0);
+    private AuthenticatePassword panelAuthen = new AuthenticatePassword("");
     private ChangePassword panelChangePass;
 
-    public DashboardAdmin(int userId) throws SQLException {
+    public DashboardAdmin(int userId) {
         initComponents();
         setUserId(userId);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -49,8 +46,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panel5 = new SamplePanel("5");
         panelAccMana = new AccountManagement(getUserId());
         panelChangePass = new ChangePassword(getUserId());
-        panelUpdInfo = new UpdateInformation(getUserId());
-
+        
         menu.initMoving(DashboardAdmin.this);
 
         menu.addEventMenuSelected(
@@ -73,12 +69,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
                         break;
                     case 7:
                         setPanel(panelAccMana);
-                        break;
-                    case 8:
-                        LoginMainFrame loginFrame = new LoginMainFrame();
-                        loginFrame.setVisible(true);
-                        setVisible(false);
-                        break;
                     default:
                         break;
                 }
@@ -88,8 +78,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
 
         panelAccMana.addEventChangePass((ActionEvent ae) -> {
-            panelAuthen.setServiceType(1);
-            database dtb_query = new database();
+            Database dtb_query = new Database();
             try {
                 String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
                 panelAuthen.setReferencePass(referencePass);
@@ -100,96 +89,21 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
 
         panelAuthen.addEventConfirm((ActionEvent ae) -> {
-//            System.out.println("Pressed confirn button");
+            System.out.println("Pressed confirn button");
             String userPass = panelAuthen.getUserPass();
+                        System.out.println("Referrence: " + panelAuthen.getReferencePass() + ", Input: " + userPass);
+                        System.out.println(userPass.equals(panelAuthen.getReferencePass()));
             if (userPass.isEmpty()) {
-//                JOptionPane.showMessageDialog(panelAccMana, "Please fill up your password");
-                panelAuthen.setLabelWrongPass("Fill up your password!", true);
             } else {
-                if (!userPass.isEmpty()&&userPass.equals(panelAuthen.getReferencePass())) {
-                    // set label if wrong password
+                if ((panelAuthen.getReferencePass() != null) && (userPass.equals(panelAuthen.getReferencePass()))) {
                     panelAuthen.setLabelWrongPass("", false);
-                    // change panel
-                    if (panelAuthen.getServiceType() == 0) {
-                        setPanel(panelUpdInfo);
-                    }
-                    if (panelAuthen.getServiceType() == 1) {
-                        setPanel(panelChangePass);
-                    }
-                    if (panelAuthen.getServiceType() == 2) {
-                        // delete account
-                        int result = JOptionPane.showConfirmDialog(panelAccMana, "Are you really want to delete account?", "Warning!!", JOptionPane.YES_NO_OPTION);
-                        if (result == JOptionPane.YES_OPTION) {
-                            // delete account and come back log in frame
-                            database dtb = new database();
-                            try {
-                                dtb.deleteAccount(getUserId());
-                                LoginMainFrame loginFr = new LoginMainFrame();
-                                loginFr.setVisible(true);
-                                setVisible(false);
-                            } catch (SQLException ex) {
-                                Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            setPanel(panelAccMana);
-                        }
-                    }
+                    setPanel(panelChangePass);
                 } else {
-                    panelAuthen.setLabelWrongPass("Invalid or incorrect password!", true);
+                    panelAuthen.setLabelWrongPass("Incorect password!", true);
                 }
             }
         });
-
-        panelAccMana.addEventDeleteAccount((ActionEvent ae) -> {
-            panelAuthen.setServiceType(2);
-            database dtb_query = new database();
-            try {
-                String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
-                panelAuthen.setReferencePass(referencePass);
-                setPanel(panelAuthen);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
-        panelChangePass.addEventConfirm((ActionEvent ae) -> {
-            if ((panelChangePass.getNewPassword().equals(panelChangePass.getRepeatNewPassword())) && (!"".equals(panelChangePass.getNewPassword()))) {
-                database dtb = new database();
-                try {
-                    // 
-                    String newPassword = panelChangePass.getNewPassword();
-                    dtb.updatePassword(panelChangePass.getUserID(), newPassword);
-                    JOptionPane.showMessageDialog(panelAccMana, "Successfully update password");
-                    panelChangePass.removeAll();
-                    setPanel(panelAccMana);
-                } catch (SQLException ex) {
-                    Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                panelChangePass.setLabelWrongPass("Please check your confirmation password again!", true);
-            }
-        });
-        panelAccMana.addEventUpdateInfo((ActionEvent ae) -> {
-            panelAuthen.setServiceType(0);
-            database dtb_query = new database();
-            try {
-                String referencePass = dtb_query.getPassword(panelAccMana.getUserID());
-                panelAuthen.setReferencePass(referencePass);
-                setPanel(panelAuthen);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        panelUpdInfo.addEventUpdateConfirm((ActionEvent ae) -> {
-            try {
-                if (panelUpdInfo.updateInformation()) {
-//                    
-                    setPanel(panelAccMana);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        
         setPanel(panel1);
     }
 
@@ -238,10 +152,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -264,6 +177,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

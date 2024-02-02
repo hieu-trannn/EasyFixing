@@ -4,8 +4,6 @@
  */
 package accountManagement;
 
-import java.awt.event.ActionListener;
-
 /**
  *
  * @author hieut
@@ -35,7 +33,6 @@ public class ChangePassword extends javax.swing.JPanel {
         btnCfChangePwd = new swing.NPLinkButton();
         jLabel2 = new javax.swing.JLabel();
         txtRePass = new swing.NPLinkTextField();
-        labelWrongPass = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,25 +77,20 @@ public class ChangePassword extends javax.swing.JPanel {
             }
         });
 
-        labelWrongPass.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        labelWrongPass.setForeground(new java.awt.Color(255, 0, 51));
-        labelWrongPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
+                .addGap(237, 237, 237)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addComponent(txtRePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCfChangePwd, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelWrongPass, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 175, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                    .addComponent(btnCfChangePwd, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +101,11 @@ public class ChangePassword extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtRePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(labelWrongPass, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(52, 52, 52)
                 .addComponent(btnCfChangePwd, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(136, Short.MAX_VALUE))
         );
@@ -134,9 +124,6 @@ public class ChangePassword extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRePassActionPerformed
 
-    public void addEventConfirm(ActionListener event) {
-        btnCfChangePwd.addActionListener(event);
-    }
     public int getUserID()
     {
         return this.UserID;
@@ -145,29 +132,13 @@ public class ChangePassword extends javax.swing.JPanel {
     {
         this.UserID = userid;
     }
-    public String getNewPassword()
-    {
-        return txtPass.getText();
-    }
-    public void setLabelWrongPass(String text, Boolean visible) {
-        if (text != null) {
-            labelWrongPass.setText(text);
-        }
-        if (visible != null) {
-            labelWrongPass.setVisible(visible);
-        }
-    }
-    public String getRepeatNewPassword()
-    {
-        return txtRePass.getText();
-    }
+    
     private int UserID;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.NPLinkButton btnCfChangePwd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel labelWrongPass;
     private swing.NPLinkTextField txtPass;
     private swing.NPLinkTextField txtRePass;
     // End of variables declaration//GEN-END:variables

@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -19,9 +21,9 @@ import java.util.Vector;
  *
  * @author Admin
  */
-public class database {
+public class Database {
 
-    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=EasyFixing;user=sa;password=130902";
+    public static String ConnectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=TestDB;user=sa;password=NPLink1612";
 
     public void main(String[] args) throws ParseException {
         try (Connection con = DriverManager.getConnection(ConnectionUrl); Statement stmt = con.createStatement();) {
@@ -230,25 +232,34 @@ public class database {
         }
     }
 
-    public Vector getListOrder(int idRepairer) throws SQLException {
-        String query = "SELECT * FROM DonSuaChua WHERE IDTho = ?";
+    public Vector getListOrder(int idRepairerUser) throws SQLException {
+        String query = "SELECT * FROM DonSuaChua WHERE IDTho = ? AND TrangThai = 0";
         Connection con = DriverManager.getConnection(ConnectionUrl);
+        int idRepairer = user2WorkerID(idRepairerUser);
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             preparedStatement.setInt(1, idRepairer);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Vector<Vector> data = new Vector();
+            Vector<Vector> data = new Vector<Vector>();
             while (resultSet.next()) {
-                if (resultSet.getInt("TrangThai") == 0) {
-                    Vector row = new Vector();
-                    int idCustomer = resultSet.getInt("IDKhachHang");
-                    int idService = resultSet.getInt("IDDichVu");
-                    row.add(getName(idCustomer));   //0
-                    row.add(getServiceName(idService)); //1
-                    row.add(resultSet.getInt("TongTien"));  //2
-                    row.add(resultSet.getInt("IDDonHang")); //3
-                    data.add(row);
-                }
+                Vector row = new Vector();
+                int idCustomer = resultSet.getInt("IDKhachHang");
+                int idUser = customer2UserID(idCustomer);
+                int idService = resultSet.getInt("IDDichVu");
+                row.add(getName(idUser));   //0
+                row.add(getServiceName(idService)); //1
+                row.add(resultSet.getInt("TongTien"));  //2
+                row.add(resultSet.getInt("IDDonHang")); //3
+                data.add(row);
             }
+//            for (Vector innerVector : data) {
+//                for (int i = 0; i < innerVector.size(); i++) {
+//                    System.out.print(innerVector.get(i)); // Print element
+//                    if (i < innerVector.size() - 1) {
+//                        System.out.print(", "); // Print comma after each element except the last
+//                    }
+//                }
+//                System.out.println(); // Move to the next line after printing each inner vector
+//            }
             return data;
         }
     }
@@ -381,8 +392,8 @@ public class database {
             if (resultSet.next()) {
                 return (resultSet.getInt("IDNguoiDung"));
             } else {
-                System.out.println("Không tìm thấy " + idCustomer);
-                return 99;
+                System.out.println("Can't find customer with ID " + idCustomer);
+                return -1;
             }
         }
     }
@@ -398,8 +409,8 @@ public class database {
             if (resultSet.next()) {
                 return (resultSet.getInt("IDKhachHang"));
             } else {
-                System.out.println("Không tìm thấy " + idCustomer);
-                return 99;
+                System.out.println("Can't find customer with user ID " + idCustomer);
+                return -1;
             }
 //            return resultSet.getInt("IDKhachHang");
         }
@@ -417,8 +428,8 @@ public class database {
             if (resultSet.next()) {
                 return (resultSet.getInt("IDNguoiDung"));
             } else {
-                System.out.println("Không tìm thấy " + idCustomer);
-                return 99;
+                System.out.println("Can't find repairer with ID " + idCustomer);
+                return -1;
             }
 
         }
@@ -434,8 +445,8 @@ public class database {
             if (resultSet.next()) {
                 return (resultSet.getInt("IDTho"));
             } else {
-                System.out.println("Không tìm thấy " + idCustomer);
-                return 99;
+                System.out.println("Can't find repairer with User ID " + idCustomer);
+                return -1;
             }
         }
     }
@@ -465,6 +476,7 @@ public class database {
             return data;
         }
     }
+
     //get Customer's feedbacks list
     public Vector getWorkerListFeedback(int idWorker) throws SQLException {
         String query = "SELECT * FROM PhanHoi WHERE IDTho = ?";
@@ -490,6 +502,7 @@ public class database {
             return data;
         }
     }
+
     // feedback for complete bill but not reply
     public Vector getRemainFeedbackList(int idCustomer) throws SQLException {
         String query = "SELECT * FROM DonSuaChua WHERE IDKhachHang = ?";
@@ -514,6 +527,36 @@ public class database {
                     data.add(row);
                 }
             }
+            return data;
+        }
+    }
+
+    public Vector getOrderData(int idOrder) throws SQLException {
+        String query = "SELECT * FROM DonSuaChua WHERE IDDonHang = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, idOrder);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Vector data = new Vector();
+            while (resultSet.next()) {
+                int idCustomer = resultSet.getInt("IDKhachHang");
+                int idUser = customer2UserID(idCustomer);
+                int idService = resultSet.getInt("IDDichVu");
+                data.add(getName(idUser));   //0
+                data.add(getServiceName(idService)); //1
+                data.add(resultSet.getString("MoTaVanDe")); //2
+                data.add(resultSet.getString("TongTien"));  //3
+                data.add(resultSet.getInt("TrangThai")); //4
+                Timestamp time = resultSet.getTimestamp("ThoiGianThanhToan");
+                if (time != null) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+                    String formatedTime = dateFormat.format(time);
+                    data.add(formatedTime); //4
+                } else {
+                    data.add("Haven't paid");
+                }
+            }
+
             return data;
         }
     }

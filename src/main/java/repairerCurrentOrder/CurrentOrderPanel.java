@@ -5,18 +5,18 @@
 package repairerCurrentOrder;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import repairerCurrentOrder.TableActionCellEditor;
-import repairerCurrentOrder.TableActionCellRender;
-import repairerCurrentOrder.TableActionEvent;
-import ultis.database;
+import ultis.Database;
 
 /**
  *
@@ -25,15 +25,15 @@ import ultis.database;
 public class CurrentOrderPanel extends javax.swing.JPanel {
 
     private int UserID;
+    private int idOrder;
 
     /**
      * Creates new form CurrentOrder
      */
     public CurrentOrderPanel(int userid) {
-
+        setUserID(userid);
         initComponents();
         initTable();
-        setUserID(userid);
     }
 
     public void initTable() {
@@ -42,9 +42,9 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onAccept(int row) {
-                System.out.println("Pressed Accept");
+//                System.out.println("Pressed Accept");
                 int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                database dtb_query = new database();
+                Database dtb_query = new Database();
                 try {
                     dtb_query.updateStateOrder(id, 2);
                 } catch (SQLException ex) {
@@ -56,12 +56,12 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
             @Override
             public void onRefuse(int row) {
-                System.out.println("Pressed Refuse");
+//                System.out.println("Pressed Refuse");
                 if (tableOrder.isEditing()) {
                     tableOrder.getCellEditor().stopCellEditing();
                 }
                 int id = (int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4);
-                database dtb_query = new database();
+                Database dtb_query = new Database();
                 try {
                     dtb_query.updateStateOrder(id, 1);
                 } catch (SQLException ex) {
@@ -72,9 +72,9 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             }
         };
 
-        database dtb_query = new database();
+        Database dtb_query = new Database();
         try {
-            Vector<Vector> data = dtb_query.getListOrder(1);
+            Vector<Vector> data = dtb_query.getListOrder(getUserID());
             for (Vector rowData : data) {
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
                 model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), "Placeholder", (int) rowData.get(3)});
@@ -91,6 +91,21 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
         tableOrder.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
         tableOrder.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+
+        tableOrder.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+//                    int selectedRow = tableOrder.getSelectedRow();
+                    int selectedColumn = tableOrder.getSelectedColumn();
+
+                    if (selectedColumn != 3) {
+                        setIdOrder((int) tableOrder.getValueAt(tableOrder.getSelectedRow(), 4));
+                        btnHiden.doClick();
+                    }
+                }
+            }
+        });
     }
 
     public void setHeader() {
@@ -99,6 +114,10 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tableOrder.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    public void addEventShowOrder(ActionListener event) {
+        btnHiden.addActionListener(event);
     }
 
     /**
@@ -110,10 +129,13 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnHiden = new javax.swing.JButton();
         panelBorder1 = new swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOrder = new javax.swing.JTable();
+
+        btnHiden.setText("jButton1");
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,7 +151,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Service", "Prize", "Status", "ID"
+                "Customer", "Service", "Price", "Status", "ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -196,6 +218,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHiden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private swing.PanelBorder panelBorder1;
@@ -214,5 +237,19 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
      */
     public void setUserID(int UserID) {
         this.UserID = UserID;
+    }
+
+    /**
+     * @return the idOrder
+     */
+    public int getIdOrder() {
+        return idOrder;
+    }
+
+    /**
+     * @param idOrder the idOrder to set
+     */
+    public void setIdOrder(int idOrder) {
+        this.idOrder = idOrder;
     }
 }

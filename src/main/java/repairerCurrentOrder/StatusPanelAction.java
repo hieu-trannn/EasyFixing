@@ -57,7 +57,7 @@ public class StatusPanelAction extends javax.swing.JPanel {
         btnAccept.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         btnAccept.setRadius(20);
 
-        btnRefuse.setText("Refuse");
+        btnRefuse.setText("Reject");
         btnRefuse.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         btnRefuse.setRadius(20);
         btnRefuse.addActionListener(new java.awt.event.ActionListener() {

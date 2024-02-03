@@ -8,6 +8,7 @@ import accountManagement.AccountManagement;
 import accountManagement.AuthenticatePassword;
 import accountManagement.ChangePassword;
 import accountManagement.UpdateInformation;
+import adminUpdateService.UpdateServicePanel;
 import adminUserManagement.AddWorker;
 import adminUserManagement.UpdateWorker;
 import adminUserManagement.UserManagement;
@@ -41,6 +42,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private UserManagement panelUserMana;
     private AddWorker panelAddWorker;
     private UpdateWorker panelUpdateWorker;
+    private UpdateServicePanel panelUpdateService;
 
     public DashboardAdmin(int userId) throws SQLException {
         initComponents();
@@ -59,6 +61,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panelUserMana = new UserManagement();
         panelAddWorker = new AddWorker();
         panelUpdateWorker = new UpdateWorker(0);
+        panelUpdateService = new UpdateServicePanel();
 
         menu.initMoving(DashboardAdmin.this);
 
@@ -72,7 +75,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                         setPanel(panelUserMana);
                         break;
                     case 2:
-                        setPanel(panel2);
+                        setPanel(panelUpdateService);
                         break;
                     case 3:
                         setPanel(panel3);
@@ -259,6 +262,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
 
         });
+//        panelUpdateService.
+        
         setPanel(panel1);
     }
 

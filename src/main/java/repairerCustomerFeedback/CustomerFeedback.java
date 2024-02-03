@@ -30,6 +30,8 @@ import ultis.Database;
 public class CustomerFeedback extends javax.swing.JPanel {
 
     private int UserID;
+    private Vector<Integer> workerIDList = new Vector<>();
+    private Vector<Integer> serviceIDList = new Vector<>();
 
     /**
      * Creates new form CurrentOrder
@@ -47,7 +49,13 @@ public class CustomerFeedback extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onAccept(int row) {
-                showFeedbackDialog();
+                int workerId = workerIDList.get(row);
+                int serviceId = serviceIDList.get(row);
+                try {
+                    showFeedbackDialog(workerId, serviceId, row);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerFeedback.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
 
@@ -60,6 +68,12 @@ public class CustomerFeedback extends javax.swing.JPanel {
             for (Vector rowData : data) {
                 DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
                 model.addRow(new Object[]{rowData.get(0), rowData.get(1), rowData.get(2), rowData.get(3), "temp"});
+//                Integer a = Integer.valueOf(rowData.get(4));
+                int workerId = ((Number)rowData.get(4)).intValue();
+                int serviceId = ((Number)rowData.get(5)).intValue();
+                System.out.println("Worker id get from list: " + workerId);
+                workerIDList.add(workerId);
+                serviceIDList.add(serviceId);
             }
 
         } catch (SQLException ex) {
@@ -171,7 +185,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showFeedbackDialog() {
+    public void showFeedbackDialog(int workerId, int serviceId, int row) throws SQLException {
         JTextField textField = new JTextField();
         JTextField textFieldPoint = new JTextField();
         textFieldPoint.addFocusListener(new FocusListener() {
@@ -189,7 +203,7 @@ public class CustomerFeedback extends javax.swing.JPanel {
                 }
             }
         });
-        Object[] messageArray = { "Customer Feedback", textFieldPoint,"Point", textField};
+        Object[] messageArray = {"Customer Feedback", textFieldPoint, "Point", textField};
 
         int option = JOptionPane.showConfirmDialog(
                 null,
@@ -202,11 +216,16 @@ public class CustomerFeedback extends javax.swing.JPanel {
         if (option == JOptionPane.OK_OPTION) {
             if ("".equals(textField.getText()) || "".equals(textFieldPoint.getText())) {
                 JOptionPane.showMessageDialog(null, "Please fill up all information!");
-                showFeedbackDialog();
+                showFeedbackDialog(workerId,serviceId, row);
             } else {
                 Database dtb = new Database();
-                // add later
+                System.out.println("User iD: " + getUserID());
+                int idCustomer = dtb.user2CustomerID(getUserID());
+                System.out.println("Customer iD: " + idCustomer);
+                dtb.addCustomerFeedback(idCustomer,textField.getText() ,textFieldPoint.getText(), workerId, serviceId);
                 System.out.println("Feedback success");
+                DefaultTableModel model = (DefaultTableModel) tableOrder.getModel();
+                model.removeRow(row);
             }
         } else {
             System.out.println("cancel feedback");

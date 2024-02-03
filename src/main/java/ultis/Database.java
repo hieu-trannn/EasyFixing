@@ -593,12 +593,15 @@ public class Database {
                     int idWorker = resultSet.getInt("IDTho");
                     int idService = resultSet.getInt("IDDichVu");
                     int workerUserId = worker2UserID(idWorker);
-                    System.out.println("2");
+//                    System.out.println("2");
                     row.add(getName(workerUserId));   //0
-                    System.out.println(row.get(0));
+//                    System.out.println(row.get(0));
                     row.add(getServiceName(idService)); //1
                     row.add(resultSet.getInt("TongTien"));  //2
                     row.add(resultSet.getString("ThoiGianThanhToan")); //3
+                    // add worker id and service id
+                    row.add(idWorker);
+                    row.add(idService);
                     data.add(row);
                 }
             }
@@ -639,7 +642,7 @@ public class Database {
             }
         }
     }
-    
+
     public Vector getOrderData(int idOrder) throws SQLException {
         String query = "SELECT * FROM DonSuaChua WHERE IDDonHang = ?";
         Connection con = DriverManager.getConnection(ConnectionUrl);
@@ -713,23 +716,21 @@ public class Database {
             System.out.print("Delete Order!");
         }
     }
-    
-     public boolean isWorkerExist(int workerId) throws SQLException {
+
+    public boolean isWorkerExist(int workerId) throws SQLException {
         String checkWorkerSql = "SELECT 1 FROM Tho WHERE IDTho = ?";
 
         Connection con = DriverManager.getConnection(ConnectionUrl);
-        try ( PreparedStatement checkWorkerStatement = con.prepareStatement(checkWorkerSql)) {
+        try (PreparedStatement checkWorkerStatement = con.prepareStatement(checkWorkerSql)) {
 
             // Thiết lập giá trị cho tham số trong câu lệnh SQL cho cả hai bảng
-            checkWorkerStatement.setInt(1,workerId );
+            checkWorkerStatement.setInt(1, workerId);
 
             try (ResultSet workerResultSet = checkWorkerStatement.executeQuery()) {
                 if (workerResultSet.next()) {
                     // ID tồn tại trong bảng quản lý, thực hiện xóa
                     return true;
-                }
-                else
-                {
+                } else {
                     return false;
                 }
             }
@@ -739,5 +740,132 @@ public class Database {
         }
         return false;
     }
-     
+
+    public void addCustomerFeedback(int idCustomer, String DiemDanhGia, String DanhGiaTomTat, int idWorker, int idService) throws SQLException {
+        String query = "INSERT INTO PhanHoi (DiemDanhGia, DanhGiaTomTat, ThoiGianPhanHoi, IDKhachHang, IDTho, IDDichVu) VALUES (?, ?, ?, ?, ?, ?)";
+
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            // Lấy thời gian hiện tại
+            long currentTimeMillis = System.currentTimeMillis();
+            Timestamp currentTimestamp = new Timestamp(currentTimeMillis);
+
+            preparedStatement.setString(1, DiemDanhGia);
+            preparedStatement.setString(2, DanhGiaTomTat);
+            preparedStatement.setTimestamp(3, currentTimestamp);
+            preparedStatement.setInt(4, idCustomer);
+            preparedStatement.setInt(5, idWorker);
+            preparedStatement.setInt(6, idService);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected <= 0) {
+                // Handle the case where the insert did not succeed
+                throw new SQLException("Failed to insert user.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // get service name lise
+    public Vector getServiceList() throws SQLException {
+        String query = "SELECT IDLoaiDichVu, TenDichVu FROM LoaiDichVu";
+        Vector<Vector> ServiceInfo = new Vector<Vector>();
+
+        try (Connection connection = DriverManager.getConnection(ConnectionUrl)) {
+
+            // Thực hiện truy vấn
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                // Thực hiện truy vấn SELECT
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                // Xử lý kết quả
+                while (resultSet.next()) {
+                    Vector row = new Vector();
+                    // Lấy dữ liệu từ ResultSet
+                    int idService = resultSet.getInt("IDLoaiDichVu");
+                    String serviceName = resultSet.getString("TenDichVu");
+                    row.add(idService);
+                    row.add(serviceName);
+                    ServiceInfo.add(row);
+                }
+                return ServiceInfo;
+            }
+        }
+    }
+
+    public void addService(String serviceName) throws SQLException {
+        String insertQuery = "INSERT INTO LoaiDichVu (TenDichVu) VALUES (?)";
+        try (Connection connection = DriverManager.getConnection(ConnectionUrl)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                // Đặt giá trị tham số là tên dịch vụ mới
+                preparedStatement.setString(1, serviceName);
+
+                // Thực hiện lệnh INSERT
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Add successfully.");
+                } else {
+                    System.out.println("Add fail.");
+                }
+            } catch (SQLException e) {
+            }
+        }
+    }
+
+    // delete Service from table
+    private static void deleteServiceFromTable(String tableName, int idDichVuToDelete) throws SQLException {
+        String deleteQuery = "DELETE FROM " + tableName + " WHERE IDDichVu = ?";
+        try (Connection connection = DriverManager.getConnection(ConnectionUrl)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+                // Set the parameter for IDDichVu
+                preparedStatement.setInt(1, idDichVuToDelete);
+
+                // Execute the DELETE statement
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                System.out.println("Deleted from " + tableName + ": " + rowsAffected + " rows affected.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteService(int serviceId) throws SQLException {
+        String query = "DELETE FROM LoaiDichVu WHERE IDLoaiDichVu = ?";
+        deleteServiceFromTable("CoTheLam", serviceId);
+        deleteServiceFromTable("DonSuaChua", serviceId);
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, serviceId);
+            preparedStatement.executeUpdate();
+            System.out.print("Delete Service Successfully!");
+        }
+    }
+        public String getCitizenNum(int id) throws SQLException {
+        String query = "SELECT * FROM NguoiDung WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("SoCCCD");
+            } else {
+                return null;
+            }
+        }
+    }
+        public String getPhoneNum(int id) throws SQLException {
+        String query = "SELECT * FROM NguoiDung WHERE IDNguoiDung = ?";
+        Connection con = DriverManager.getConnection(ConnectionUrl);
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("SoDienThoai");
+            } else {
+                return null;
+            }
+        }
+    }
 }

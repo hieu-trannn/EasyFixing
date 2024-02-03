@@ -21,8 +21,8 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import login.LoginPanel;
 import repairerCustomerFeedback.WorkerFeedbackHistory;
-import repairerCurrentOrder.CurrentOrderPanel;
-import repairerCurrentOrder.ShowOrderPanel;
+import repairerRequestedOrder.RequestedOrderPanel;
+import repairerRequestedOrder.ShowOrderPanel;
 import ultis.Database;
 import ultis.EventMenuSelected;
 
@@ -37,7 +37,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
      */
     // Declare Panel here
     private SamplePanel panel1, panel2, panel3, panel4, panel5;
-    private CurrentOrderPanel panelCurrentOrder;
+    private RequestedOrderPanel panelCurrentOrder;
     private ShowOrderPanel panelShowOrder;
     private AccountManagement panelAccMana;
     private UpdateInformation panelUpdInfo;
@@ -62,7 +62,7 @@ public class DashboardRepairer extends javax.swing.JFrame {
         panelChangePass = new ChangePassword(getUserId());
         panelUpdInfo = new UpdateInformation(getUserId());
         panelWorkerFbHis = new WorkerFeedbackHistory(getUserId());
-        panelCurrentOrder = new CurrentOrderPanel(getUserId());
+        panelCurrentOrder = new RequestedOrderPanel(getUserId());
         panelShowOrder = new ShowOrderPanel();
         
         menu.initMoving(DashboardRepairer.this);
